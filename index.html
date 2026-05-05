@@ -69,9 +69,29 @@ color:white;
 
 /* HERO */
 header{
+position:relative;
 padding:90px 20px 50px;
 text-align:center;
-background:radial-gradient(circle at top, #0B1B3A, #070B18);
+background: radial-gradient(circle at top, rgba(11,27,58,0.9), rgba(7,11,24,0.95)),
+url('logo.jpg') center/cover no-repeat;
+}
+
+/* Overlay extra para look premium */
+header::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:0;
+}
+
+/* Asegura que el contenido esté encima */
+header *{
+position:relative;
+z-index:1;
 }
 
 .logo img{
@@ -417,6 +437,89 @@ Nuestro objetivo no es solo darte capital, sino crear un sistema donde puedas op
 <div class="step-number">4</div>
 <div class="step-title">Retira ganancias</div>
 <div class="step-desc">Genera beneficios y retíralos según el plan.</div>
+</div>
+
+</div>
+
+<!-- 🔥 MODELO FUNDEDX -->
+<div class="section-title">MODELO FUNDEDX</div>
+
+<div class="objetivo" style="text-align:left; font-size:15px; line-height:1.8;">
+
+En FundedX no todos los traders siguen el mismo camino.  
+Aplicamos un sistema híbrido diseñado para proteger el capital y potenciar a los traders reales.
+
+<br><br>
+
+Dependiendo de tu rendimiento, podrás acceder a una de las siguientes rutas:
+
+</div>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">A</div>
+<div class="step-title">Funded</div>
+<div class="step-desc">
+Luego de toda evaluación operarás en una fase de colchón antes de pasar a capital real. Al ser revisado si tienes un rendimiento por encima del promedio, se te otorgará la opción de decidir entre la A o la B.
+</div>
+</div>
+
+<div class="step">
+<div class="step-number">B</div>
+<div class="step-title">Funded Real</div>
+<div class="step-desc">
+Si demuestras una gestion excepcional al ser revisado, bajo nuestra total discreción, tendrás la opción de ir directamente a una cuenta real con retiros diarios y condiciones profesionales.
+</div>
+</div>
+
+</div>
+
+<div class="faq-container">
+
+<div class="faq-item">
+<div class="faq-question">🧩Funded</div>
+<div class="faq-answer">
+Fase correspondiente luego de pasar por evaluación.
+
+<br><br>
+🎯 Objetivo: Crear colchón para financiación en real. 
+💸 Puede retirar hasta el 40% del valor del colchón una vez alcanzado.  
+🔓 El resto se utiliza para escalar a cuenta real.
+
+<br><br>
+Este sistema permite validar consistencia antes de asignar capital real.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">🚀 Funded Real</div>
+<div class="faq-answer">
+Los traders que sean evaluados y tengan un rendimiento mayor al promedio se les otorga está opción.
+
+<br><br>
+✔️ Retiros disponibles bajo condiciones del programa.
+✔️ Profit Split inicial 50/50.
+✔️ Entorno profesional real.
+
+<br><br>
+Este acceso está sujeto a revisión interna del rendimiento del trader.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">🔓 Escalado a Cuenta Real</div>
+<div class="faq-answer">
+Una vez completada la fase colchón:
+
+<br><br>
+✔️ Se asigna cuenta real  
+✔️ Profit Split mejora a 80/20 a favor del trader  
+✔️ Mayor libertad operativa  
+
+<br><br>
+El objetivo es construir traders sostenibles a largo plazo.
+</div>
 </div>
 
 </div>
