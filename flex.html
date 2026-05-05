@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FundedX FLEX</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#070B18;
+color:white;
+}
+
+/* HERO */
+header{
+padding:70px 20px 40px;
+text-align:center;
+background:radial-gradient(circle at top, #0B1B3A, #070B18);
+}
+
+.logo-title{
+font-size:28px;
+font-weight:bold;
+color:#00D4FF;
+}
+
+.subtitle{
+font-size:14px;
+opacity:0.8;
+margin-top:10px;
+}
+
+/* BOTÓN VOLVER */
+.back{
+margin-top:20px;
+display:inline-block;
+padding:10px 18px;
+background:#1E2A44;
+color:white;
+border-radius:8px;
+text-decoration:none;
+font-size:13px;
+}
+
+.back:hover{
+background:#00D4FF;
+color:black;
+}
+
+/* GRID */
+.grid{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+padding:30px;
+}
+
+.card{
+background:#0C142B;
+border:1px solid #1E2A44;
+border-radius:16px;
+width:260px;
+padding:25px;
+text-align:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+border-color:#00D4FF;
+}
+
+.title{
+font-size:18px;
+font-weight:bold;
+}
+
+.price{
+color:#00D4FF;
+font-size:22px;
+margin:10px 0;
+}
+
+.desc{
+font-size:14px;
+opacity:0.85;
+}
+
+/* ACORDEÓN */
+.accordion{
+max-width:900px;
+margin:20px auto;
+padding:0 20px;
+}
+
+.acc-item{
+background:#0C142B;
+border:1px solid #1E2A44;
+border-radius:10px;
+margin-bottom:10px;
+overflow:hidden;
+}
+
+.acc-title{
+padding:15px;
+cursor:pointer;
+font-weight:bold;
+position:relative;
+}
+
+.acc-title::after{
+content:"+";
+position:absolute;
+right:20px;
+}
+
+.acc-item.active .acc-title::after{
+content:"-";
+}
+
+.acc-content{
+max-height:0;
+overflow:hidden;
+padding:0 15px;
+opacity:0;
+transition:all 0.3s ease;
+font-size:14px;
+line-height:1.6;
+}
+
+.acc-item.active .acc-content{
+max-height:500px;
+padding:15px;
+opacity:0.9;
+}
+.plan{
+font-size:22px;
+font-weight:bold;
+color:#00D4FF;
+margin-bottom:8px;
+}
+
+.buy-btn{
+margin-top:15px;
+display:inline-block;
+padding:10px 15px;
+background:#00D4FF;
+color:#000;
+font-weight:bold;
+border-radius:10px;
+text-decoration:none;
+font-size:13px;
+transition:0.2s;
+}
+
+.buy-btn:hover{
+background:#00b6dd;
+transform:scale(1.05);
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo-title">🎁 FundedX FLEX</div>
+
+<div class="subtitle">
+Empieza con poco y paga solo cuando avanzas.
+</div>
+
+<a class="back" href="index.html">← Volver al inicio</a>
+
+</header>
+
+<div class="grid">
+
+<div class="card">
+<div class="title">💎 FundedX FLEX</div>
+
+<div class="plan">1K</div>
+
+<div class="desc">
+📉 (EOD) TD: 10%<br>
+🎯 10% / 5%
+</div>
+
+<a class="buy-btn" href="#">Comprar</a>
+</div>
+
+
+<div class="card">
+<div class="title">💎 FundedX FLEX</div>
+
+<div class="plan">2K</div>
+
+<div class="desc">
+📉 (EOD) TD: 10%<br>
+🎯 10% / 5%
+</div>
+
+<a class="buy-btn" href="#">Comprar</a>
+</div>
+
+
+<div class="card">
+<div class="title">💎 FundedX FLEX</div>
+
+<div class="plan">5K</div>
+
+<div class="desc">
+📉 (EOD) TD: 10%<br>
+🎯 10% / 5%
+</div>
+
+<a class="buy-btn" href="#">Comprar</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- ACORDEÓN -->
+<div class="accordion">
+
+<div class="acc-item">
+<div class="acc-title">💳 Costos del programa</div>
+<div class="acc-content">
+
+🟢 <b>Fase 1 (pagas al aprobar)</b><br>
+1K → $10<br>
+2K → $20<br>
+5K → $50<br><br>
+
+♻️ Intentos ilimitados<br>
+⏱️ 24h entre intentos<br><br>
+
+🟡 <b>Fase 2 (pagas al pasar F1)</b><br>
+1K → $15<br>
+2K → $30<br>
+5K → $75<br><br>
+
+👉 2 intentos gratis<br>
+🔄 Reset adicional:<br>
+1K → $5<br>
+2K → $10<br>
+5K → $25<br><br>
+
+Máximo 3 resets
+
+</div>
+</div>
+
+<div class="acc-item">
+<div class="acc-title">📉 Reglas de Trading</div>
+<div class="acc-content">
+
+📉 Trailing Drawdown (EOD): 10%<br>
+Se bloquea al alcanzar el balance inicial<br><br>
+
+⚖️ Regla de consistencia: 50%<br>
+Tu mejor día no puede superar el 50% del objetivo<br><br>
+
+📊 Riesgo por trade: máximo 2%<br>
+🛑 Stop Loss obligatorio<br>
+❌ Sin SL → pérdida de la cuenta
+
+</div>
+</div>
+
+<div class="acc-item">
+<div class="acc-title">🧠 ¿Cómo funciona?</div>
+<div class="acc-content">
+
+Pasas las fases pagando poco al inicio<br><br>
+
+Solo inviertes más cuando ya estás cerca de fondearte<br><br>
+
+Sistema diseñado para reducir riesgo inicial y permitir múltiples intentos
+
+</div>
+</div>
+
+</div>
+
+<script>
+const items = document.querySelectorAll(".acc-item");
+
+items.forEach(item => {
+item.addEventListener("click", () => {
+
+items.forEach(i => {
+if(i !== item){
+i.classList.remove("active");
+}
+});
+
+item.classList.toggle("active");
+
+});
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FundedX | One Step</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#070B18;
+color:white;
+}
+
+/* HERO */
+header{
+padding:80px 20px 40px;
+text-align:center;
+background:radial-gradient(circle at top, #0B1B3A, #070B18);
+position:relative;
+}
+
+.back{
+position:absolute;
+left:20px;
+top:20px;
+background:#00D4FF;
+color:#000;
+padding:8px 14px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+font-size:13px;
+}
+
+h1{
+font-size:30px;
+color:#00D4FF;
+margin-bottom:10px;
+}
+
+.sub{
+opacity:0.8;
+}
+
+/* PLANES */
+.plans{
+display:flex;
+gap:20px;
+overflow-x:auto;
+padding:25px;
+}
+
+.plan{
+min-width:200px;
+background:#0C142B;
+border:1px solid #1E2A44;
+border-radius:14px;
+padding:20px;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+}
+
+.plan:hover{
+border-color:#00D4FF;
+transform:translateY(-5px);
+}
+
+.plan.active{
+border-color:#00D4FF;
+box-shadow:0 0 10px #00D4FF33;
+}
+
+.plan-title{
+font-weight:bold;
+}
+
+.plan-price{
+font-size:22px;
+color:#00D4FF;
+margin-top:10px;
+}
+
+/* INFO */
+.info{
+max-width:750px;
+margin:20px auto;
+background:#0C142B;
+padding:25px;
+border-radius:14px;
+border:1px solid #1E2A44;
+line-height:1.6;
+}
+
+.info strong{
+color:#00D4FF;
+}
+
+.btn{
+margin-top:20px;
+display:block;
+background:#00D4FF;
+color:black;
+padding:14px;
+text-align:center;
+border-radius:10px;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* ACORDEON */
+.accordion{
+max-width:750px;
+margin:20px auto;
+}
+
+.acc-item{
+background:#0C142B;
+border:1px solid #1E2A44;
+border-radius:10px;
+margin-bottom:10px;
+overflow:hidden;
+}
+
+.acc-title{
+padding:16px;
+cursor:pointer;
+font-weight:bold;
+position:relative;
+}
+
+.acc-title::after{
+content:"+";
+position:absolute;
+right:20px;
+font-size:18px;
+}
+
+.acc-item.active .acc-title::after{
+content:"-";
+}
+
+.acc-content{
+max-height:0;
+overflow:hidden;
+transition:0.35s;
+padding:0 16px;
+opacity:0;
+}
+
+.acc-item.active .acc-content{
+max-height:400px;
+padding:15px 16px;
+opacity:0.85;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html" class="back">← Volver</a>
+
+<h1>🏆 1 FASE → DIRECTO A FUNDED</h1>
+<div class="sub">
+Cumple 10% y accede a Capital real + Desbloqueo exclusivo
+</div>
+
+</header>
+
+<!-- PLANES -->
+<div class="plans">
+
+<div class="plan active" onclick="selectPlan(0)">
+<div class="plan-title">2K Core</div>
+<div class="plan-price">$25</div>
+</div>
+
+<div class="plan" onclick="selectPlan(1)">
+<div class="plan-title">3K Base</div>
+<div class="plan-price">$35</div>
+</div>
+
+<div class="plan" onclick="selectPlan(2)">
+<div class="plan-title">5K Premium</div>
+<div class="plan-price">$65</div>
+</div>
+
+<div class="plan" onclick="selectPlan(3)">
+<div class="plan-title">10K Elite</div>
+<div class="plan-price">$125</div>
+</div>
+
+</div>
+
+<!-- INFO -->
+<div class="info" id="infoBox">
+
+<strong>Cuenta 2K Core</strong><br><br>
+
+📉 EOD Trailing Drawdown: 5%  
+(Se bloquea al alcanzar el 5%)<br>
+
+🎯 Objetivo: 10%<br>
+📅 Mínimo 5 días de trading<br><br>
+
+📊 Riesgo por trade: máx 2%<br>
+🛑 Stop Loss obligatorio<br>
+
+<a class="btn" href="#">Comprar cuenta</a>
+
+</div>
+
+<!-- ACORDEON -->
+<div class="accordion">
+
+<div class="acc-item">
+<div class="acc-title">⚡ Condiciones</div>
+<div class="acc-content">
+✔ 1 sola fase → te fondeas directo<br>
+❌ Sin regla de consistencia<br>
+📅 Mínimo 5 días de trading
+</div>
+</div>
+
+<div class="acc-item">
+<div class="acc-title">📉 Reglas de Trading</div>
+<div class="acc-content">
+📊 Riesgo máximo por trade: 2%<br>
+🛑 Stop Loss obligatorio<br>
+❌ Sin Stop Loss → pérdida de la cuenta
+</div>
+</div>
+
+<div class="acc-item">
+<div class="acc-title">🔥 Beneficio Exclusivo</div>
+<div class="acc-content">
+Al pasar tu cuenta, desbloqueas acceso a Directo a Funded.<br><br>
+
+✔ Puedes volver a fondearte sin repetir procesos<br>
+✔ Tienes respaldo real<br>
+✔ No empiezas desde cero<br><br>
+
+💡 Te fondeas una vez… y aseguras tu regreso siempre.
+</div>
+</div>
+
+</div>
+
+<script>
+const plans = document.querySelectorAll(".plan");
+const info = document.getElementById("infoBox");
+
+const data = [
+`<strong>Cuenta 2K Core</strong><br><br>
+📉 EOD Trailing Drawdown: 5% (se bloquea al alcanzar el 5%)<br>
+🎯 Objetivo: 10%<br>
+📅 Mínimo 5 días de trading<br><br>
+📊 Riesgo por trade: máx 2%<br>
+🛑 Stop Loss obligatorio<br>
+<a class="btn" href="#">Comprar cuenta</a>`,
+
+`<strong>Cuenta 3K Base</strong><br><br>
+📉 EOD Trailing Drawdown: 5% (se bloquea al alcanzar el 5%)<br>
+🎯 Objetivo: 10%<br>
+📅 Mínimo 5 días de trading<br><br>
+📊 Riesgo por trade: máx 2%<br>
+🛑 Stop Loss obligatorio<br>
+<a class="btn" href="#">Comprar cuenta</a>`,
+
+`<strong>Cuenta 5K Premium</strong><br><br>
+📉 EOD Trailing Drawdown: 5% (se bloquea al alcanzar el 5%)<br>
+🎯 Objetivo: 10%<br>
+📅 Mínimo 5 días de trading<br><br>
+📊 Riesgo por trade: máx 2%<br>
+🛑 Stop Loss obligatorio<br>
+<a class="btn" href="#">Comprar cuenta</a>`,
+
+`<strong>Cuenta 10K Elite</strong><br><br>
+📉 EOD Trailing Drawdown: 5% (se bloquea al alcanzar el 5%)<br>
+🎯 Objetivo: 10%<br>
+📅 Mínimo 5 días de trading<br><br>
+📊 Riesgo por trade: máx 2%<br>
+🛑 Stop Loss obligatorio<br>
+<a class="btn" href="#">Comprar cuenta</a>`
+];
+
+function selectPlan(i){
+plans.forEach(p => p.classList.remove("active"));
+plans[i].classList.add("active");
+info.innerHTML = data[i];
+}
+
+const acc = document.querySelectorAll(".acc-item");
+
+acc.forEach(item=>{
+item.addEventListener("click", ()=>{
+acc.forEach(i=> i.classList.remove("active"));
+item.classList.toggle("active");
+});
+});
+</script>
+
+</body>
+</html>
