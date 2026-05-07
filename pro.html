@@ -149,6 +149,62 @@ opacity:0.7;
 font-size:13px;
 margin-top:10px;
 }
+
+.form-box{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform: translateY(-10px);
+  transition: all 0.35s ease;
+
+  width:320px;
+  margin:15px auto 0 auto;
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.form-box.active{
+  max-height:500px;
+  opacity:1;
+  transform: translateY(0);
+}
+
+.form-box input,
+.form-box select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #1E2A44;
+  background:#0C142B;
+  color:white;
+}
+
+/* mejora visual */
+.form-box button{
+  background:#00D4FF;
+  color:black;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* BOTÃ“N */
+.btn{
+background:#00D4FF;
+border:none;
+padding:10px 16px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#00b6dd;
+transform:translateY(-2px);
+}
 </style>
 
 </head>
@@ -160,7 +216,7 @@ margin-top:10px;
 <div class="logo-title">💰FundedX PRO</div>
 
 <div class="subtitle">
-2 fases → evaluación estructurada con control de riesgo profesional
+2 Fases → Evaluación estructurada con control de riesgo profesional
 </div>
 
 <a class="back" href="/GetFundedX/">← Volver al inicio</a>
@@ -180,8 +236,6 @@ margin-top:10px;
 🎯 Objetivo: 10% / 5%
 </div>
 
-<a class="buy-btn" href="#">Comprar</a>
-
 </div>
 
 <div class="card">
@@ -193,9 +247,44 @@ margin-top:10px;
 🎯 Objetivo: 10% / 5%
 </div>
 
-<a class="buy-btn" href="#">Comprar</a>
 </div>
 </div>
+
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+  <button class="btn" onclick="toggleForm()">
+    Comprar ahora 
+  </button>
+</div>
+
+<div id="formBox" class="form-box">
+
+  <select id="plan">
+    <option value="">Selecciona el plan</option>
+    <option value="1K Pro">1K Pro</option>
+    <option value="2K Pro">2K Pro</option>
+  </select>
+
+  <input type="text" id="nombre" placeholder="Nombre">
+  <input type="text" id="telefono" placeholder="Número">
+
+  <select id="pago">
+    <option value="">Método de pago</option>
+    <option value="USDT">USDT</option>
+    <option value="CUP">CUP</option>
+  </select>
+
+<button onclick="enviar()" 
+        style="display:flex; align-items:center; justify-content:center; gap:8px;">
+
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+       width="18"
+       alt="WhatsApp">
+
+  Enviar Pedido
+
+</button>
 
 </div>
 
@@ -203,7 +292,7 @@ margin-top:10px;
 
 <div class="info-box">
 
-🧩 <span class="blue">2 fases de evaluación</span> para acceder a fondeo real.<br><br>
+🧩 <span class="blue">2 Fases de evaluación</span> para acceder a Funded.<br><br>
 
 📉 <span class="blue">EOD Drawdown 10%</span><br>
 Se calcula diariamente según el balance final del día, se bloquea al alcanzar el balance inicial.<br><br>
@@ -215,13 +304,59 @@ Tu mejor día no puede representar más del 30% del total de ganancias de la eva
 🛑 Stop Loss obligatorio (sin SL = cuenta perdida)<br><br>
 
 🧠 <span class="blue">Estructura del proceso</span><br>
-Fase 1: 10% objetivo → Fase 2: 5% objetivo → cuenta funded
+Fase 1: 10% Objetivo → Fase 2: 5% Objetivo → Cuenta Funded
 
 <div class="note">
 El objetivo es evaluar disciplina, consistencia y control de riesgo, no solo resultados rápidos.
 </div>
 
 </div>
+
+<script>
+
+function toggleForm(){
+  document.getElementById("formBox").classList.toggle("active");
+}
+
+// cerrar al tocar fuera
+document.addEventListener("click", function(e){
+
+  let form = document.getElementById("formBox");
+  let button = document.querySelector(".btn");
+
+  if(!form.contains(e.target) && e.target !== button){
+    form.classList.remove("active");
+  }
+
+});
+
+function enviar(){
+
+  let plan = document.getElementById("plan").value;
+  let nombre = document.getElementById("nombre").value;
+  let telefono = document.getElementById("telefono").value;
+  let pago = document.getElementById("pago").value;
+
+  if(!plan || !nombre || !telefono || !pago){
+    alert("Completa todos los campos");
+    return;
+  }
+
+let mensaje = `🟢 FUNDX Pedido
+
+🔥 Plan: ${plan}
+👤 Cliente: ${nombre}
+📱 Contacto: ${telefono}
+💳 Pago: ${pago}
+
+👌🏻 Gracias 😊`;
+
+  window.location.href =
+    "https://wa.me/5356789325?text=" + encodeURIComponent(mensaje);
+
+}
+
+</script>
 
 </body>
 </html>
