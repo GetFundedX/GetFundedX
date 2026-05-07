@@ -356,33 +356,32 @@ border-radius:8px;
   <button class="btn" onclick="toggleForm()">
     Comprar ahora
   </button>
-  <div id="formBox" class="form-box">
+<div class="formBox">
 
-  <select id="plan">
+  <select class="plan">
     <option value="">Selecciona el plan</option>
     <option value="Instant $100">Instant $100</option>
     <option value="Instant $200">Instant $200</option>
     <option value="Instant $500">Instant $500</option>
   </select>
 
-  <input type="text" id="nombre" placeholder="Nombre">
-  <input type="text" id="telefono" placeholder="Número">
+  <input type="text" class="nombre" placeholder="Nombre">
+  <input type="text" class="telefono" placeholder="Número">
 
-  <select id="pago">
+  <select class="pago">
     <option value="">Método de pago</option>
     <option value="USDT">USDT</option>
     <option value="CUP">CUP</option>
   </select>
 
-<button class="btn" onclick="enviar()">
-  
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-       width="18"
-       style="vertical-align:middle; margin-right:8px;">
+  <button class="wa-btn" onclick="enviar(this)">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+         width="18">
 
-  Enviar Pedido
+    Enviar Pedido
+  </button>
 
-</button>
+</div>
 
 </div>
 </div>
