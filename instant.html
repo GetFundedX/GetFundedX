@@ -485,19 +485,27 @@ Acceso a cuentas según evaluación:<br>
 
 <script>
 
-function toggleForm(){
-  document.getElementById("formBox").classList.toggle("active");
+const form = document.getElementById("formBox");
+
+function toggleForm(e){
+
+  if(e) e.stopPropagation();
+
+  form.classList.toggle("active");
 }
 
+// cerrar al tocar fuera
 document.addEventListener("click", function(e){
 
-  let form = document.getElementById("formBox");
-  let button = document.querySelector(".btn");
-
-  if(!form.contains(e.target) && e.target !== button){
+  if(!form.contains(e.target)){
     form.classList.remove("active");
   }
 
+});
+
+// evitar cierre al tocar dentro
+form.addEventListener("click", function(e){
+  e.stopPropagation();
 });
 
 function enviar(){
@@ -512,19 +520,21 @@ function enviar(){
     return;
   }
 
-let mensaje = `🟢 FUNDX Pedido
+  let mensaje =
+`🟢 FUNDX Pedido
 
-🔥 Plan: ${plan}
-👤 Cliente: ${nombre}
-📱 Contacto: ${telefono}
-💳 Pago: ${pago}
+📦 Plan: ${plan}
+👤 Nombre: ${nombre}
+📱 Número: ${telefono}
+💳 Método: ${pago}
 
-👌🏻 Gracias 😊`;
+Gracias 😊`;
 
-  window.open("https://wa.me/+5356789325?text=" + encodeURIComponent(mensaje), "_blank");
+  window.location.href =
+    "https://wa.me/5356789325?text=" +
+    encodeURIComponent(mensaje);
 }
 
 </script>
-
 </body>
 </html>
