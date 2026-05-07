@@ -89,6 +89,86 @@ font-size:14px;
 opacity:0.85;
 }
 
+.plan{
+font-size:22px;
+font-weight:bold;
+color:#00D4FF;
+margin-bottom:8px;
+}
+
+/* BOTÓN PRINCIPAL */
+.main-btn{
+display:block;
+margin:30px auto 10px;
+padding:14px 20px;
+background:#00D4FF;
+color:black;
+font-weight:bold;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:15px;
+transition:0.25s;
+}
+
+.main-btn:hover{
+transform:scale(1.03);
+box-shadow:0 0 15px #00D4FF33;
+}
+
+/* FORM */
+.formBox{
+max-width:350px;
+margin:10px auto 30px;
+
+max-height:0;
+overflow:hidden;
+opacity:0;
+transform:translateY(-10px);
+
+transition:0.35s ease;
+
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.formBox.active{
+max-height:500px;
+opacity:1;
+transform:translateY(0);
+}
+
+.formBox input,
+.formBox select{
+padding:12px;
+border-radius:10px;
+border:1px solid #1E2A44;
+background:#0C142B;
+color:white;
+}
+
+.send-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+
+background:#25D366;
+color:white;
+
+border:none;
+padding:12px;
+border-radius:10px;
+
+cursor:pointer;
+font-weight:bold;
+}
+
+.send-btn img{
+width:20px;
+}
+
 /* ACORDEÓN */
 .accordion{
 max-width:900px;
@@ -136,30 +216,6 @@ max-height:500px;
 padding:15px;
 opacity:0.9;
 }
-.plan{
-font-size:22px;
-font-weight:bold;
-color:#00D4FF;
-margin-bottom:8px;
-}
-
-.buy-btn{
-margin-top:15px;
-display:inline-block;
-padding:10px 15px;
-background:#00D4FF;
-color:#000;
-font-weight:bold;
-border-radius:10px;
-text-decoration:none;
-font-size:13px;
-transition:0.2s;
-}
-
-.buy-btn:hover{
-background:#00b6dd;
-transform:scale(1.05);
-}
 </style>
 
 </head>
@@ -178,51 +234,72 @@ Empieza con poco y paga solo cuando avanzas.
 
 </header>
 
+<!-- CARDS SIN BOTONES -->
+
 <div class="grid">
 
 <div class="card">
 <div class="title">💎 FundedX FLEX</div>
-
 <div class="plan">1K</div>
-
 <div class="desc">
 📉 (EOD) TD: 10%<br>
 🎯 10% / 5%
 </div>
-
-<a class="buy-btn" href="#">Comprar</a>
 </div>
-
 
 <div class="card">
 <div class="title">💎 FundedX FLEX</div>
-
 <div class="plan">2K</div>
-
 <div class="desc">
 📉 (EOD) TD: 10%<br>
 🎯 10% / 5%
 </div>
-
-<a class="buy-btn" href="#">Comprar</a>
 </div>
-
 
 <div class="card">
 <div class="title">💎 FundedX FLEX</div>
-
 <div class="plan">5K</div>
-
 <div class="desc">
 📉 (EOD) TD: 10%<br>
 🎯 10% / 5%
 </div>
-
-<a class="buy-btn" href="#">Comprar</a>
-</div>
 </div>
 
 </div>
+
+<!-- BOTÓN ÚNICO -->
+
+<button class="main-btn" onclick="toggleForm()">
+Compra ahora
+</button>
+
+<!-- FORMULARIO -->
+
+<div class="formBox" id="formBox">
+
+<select id="plan">
+<option value="">Selecciona el plan</option>
+<option value="1K FLEX">1K</option>
+<option value="2K FLEX">2K</option>
+<option value="5K FLEX">5K</option>
+</select>
+
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="text" id="telefono" placeholder="Número">
+
+<select id="pago">
+<option value="">Método de pago</option>
+<option value="USDT">USDT</option>
+<option value="CUP">CUP</option>
+</select>
+
+<button class="send-btn" onclick="enviar()">
+
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+
+Enviar Pedido
+
+</button>
 
 </div>
 
@@ -275,36 +352,62 @@ Tu mejor día no puede superar el 50% del objetivo<br><br>
 </div>
 
 <div class="acc-item">
-<div class="acc-title">🧠 ¿Cómo funciona?</div>
+<div class="acc-title">🧠 Cómo funciona</div>
 <div class="acc-content">
-
-Pasas las fases pagando poco al inicio<br><br>
-
-Solo inviertes más cuando ya estás cerca de fondearte<br><br>
-
-Sistema diseñado para reducir riesgo inicial y permitir múltiples intentos
-
+Sistema de bajo riesgo inicial con escalado progresivo.
 </div>
 </div>
 
 </div>
 
 <script>
+
+/* ACORDEÓN */
 const items = document.querySelectorAll(".acc-item");
 
-items.forEach(item => {
-item.addEventListener("click", () => {
-
-items.forEach(i => {
-if(i !== item){
-i.classList.remove("active");
-}
+items.forEach(item=>{
+item.addEventListener("click", ()=>{
+items.forEach(i=>{
+if(i!==item) i.classList.remove("active");
 });
-
 item.classList.toggle("active");
+});
+});
 
-});
-});
+/* FORM */
+function toggleForm(){
+document.getElementById("formBox").classList.toggle("active");
+}
+
+/* WHATSAPP */
+function enviar(){
+
+let plan = document.getElementById("plan").value;
+let nombre = document.getElementById("nombre").value;
+let telefono = document.getElementById("telefono").value;
+let pago = document.getElementById("pago").value;
+
+if(!plan || !nombre || !telefono || !pago){
+alert("Completa todos los campos");
+return;
+}
+
+let msg =
+`🟢 FUNDX ORDER
+
+📦 Plan: ${plan}
+👤 Nombre: ${nombre}
+📱 Número: ${telefono}
+💳 Método: ${pago}
+
+ Gracias😊`;
+
+window.location.href =
+"https://wa.me/5356789325?text=" +
+encodeURIComponent(msg);
+
+}
+
 </script>
 
 </body>
