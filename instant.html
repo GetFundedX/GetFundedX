@@ -187,60 +187,56 @@ transform:translateY(0);
 }
 }
 /* ACCORDION PREMIUM */
-.accordion{
-max-width:900px;
-margin:40px auto;
-padding:0 20px;
+
+.formBox{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-10px);
+
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+  width:320px;
+  margin:15px auto;
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.accordion-item{
-background:#0C142B;
-border:1px solid #1E2A44;
-border-radius:12px;
-margin-bottom:12px;
-overflow:hidden;
-transition:0.3s;
+.formBox.active{
+  max-height:500px;
+  opacity:1;
+  transform:translateY(0);
 }
 
-.accordion-header{
-padding:18px;
-cursor:pointer;
-font-weight:bold;
-position:relative;
-transition:0.3s;
+.formBox input,
+.formBox select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #1E2A44;
+  background:#0C142B;
+  color:white;
 }
 
-.accordion-header:hover{
-color:#00D4FF;
+.wa-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  background:#25D366;
+  color:white;
+
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-.accordion-header::after{
-content:"+";
-position:absolute;
-right:20px;
-font-size:20px;
-transition:0.3s;
-}
-
-.accordion-item.active .accordion-header::after{
-content:"-";
-color:#00D4FF;
-}
-
-.accordion-content{
-max-height:0;
-overflow:hidden;
-padding:0 18px;
-opacity:0;
-transition:all 0.35s ease;
-line-height:1.6;
-}
-
-.accordion-item.active .accordion-content{
-max-height:500px;
-padding:15px 18px;
-opacity:0.9;
-}
 
 /* BLOQUE DESTACADO */
 .highlight-box{
@@ -353,9 +349,12 @@ border-radius:8px;
 </table>
 
 <div style="text-align:center; margin-top:20px;">
-  <button class="btn" onclick="toggleForm()">
+
+  <button class="btn" onclick="toggleForm(this)">
     Comprar ahora
   </button>
+
+</div>
 <div class="formBox">
 
   <select class="plan">
@@ -382,8 +381,6 @@ border-radius:8px;
   </button>
 
 </div>
-
-</div>
 </div>
 
 <!-- INFO -->
@@ -391,7 +388,7 @@ border-radius:8px;
 
 <!-- RETIROS -->
 <div class="accordion-item">
-<div class="accordion-header">💸 Retiros desde el día 1</div>
+<div class="accordion-header">💸 RETIROS DESDE EL DIA 1</div>
 <div class="accordion-content">
 
 <div class="highlight-box">
@@ -413,7 +410,7 @@ Una vez retires el valor de la cuenta en ganancias netas:<br>
 
 <!-- DRAWDOWN -->
 <div class="accordion-item">
-<div class="accordion-header">📉 Reglas de Drawdown</div>
+<div class="accordion-header">📉 REGLAS DE DROWDOWN</div>
 <div class="accordion-content">
 
 <div class="highlight-box">
@@ -434,7 +431,7 @@ Si estás en profit:<br>
 
 <!-- RESTRICCIONES -->
 <div class="accordion-item">
-<div class="accordion-header">🚫 Restricciones</div>
+<div class="accordion-header">🚫 RESTRICCIONES</div>
 <div class="accordion-content">
 
 <div class="highlight-box">
@@ -484,37 +481,61 @@ Acceso a cuentas según evaluación:<br>
 
 <script>
 
-const form = document.getElementById("formBox");
+function toggleForm(button){
 
-function toggleForm(e){
+  const form =
+    button.parentElement.nextElementSibling;
 
-  if(e) e.stopPropagation();
+  // cerrar otros abiertos
+  document.querySelectorAll(".formBox").forEach(f => {
 
+    if(f !== form){
+      f.classList.remove("active");
+    }
+
+  });
+
+  // abrir/cerrar actual
   form.classList.toggle("active");
 }
 
-// cerrar al tocar fuera
+// cerrar tocando fuera
 document.addEventListener("click", function(e){
 
-  if(!form.contains(e.target)){
-    form.classList.remove("active");
-  }
+  document.querySelectorAll(".formBox").forEach(form => {
+
+    const button =
+      form.previousElementSibling.querySelector(".btn");
+
+    if(
+      !form.contains(e.target) &&
+      !button.contains(e.target)
+    ){
+      form.classList.remove("active");
+    }
+
+  });
 
 });
 
-// evitar cierre al tocar dentro
-form.addEventListener("click", function(e){
-  e.stopPropagation();
-});
+function enviar(btn){
 
-function enviar(){
+  const form = btn.closest(".formBox");
 
-  let plan = document.getElementById("plan").value;
-  let nombre = document.getElementById("nombre").value;
-  let telefono = document.getElementById("telefono").value;
-  let pago = document.getElementById("pago").value;
+  let plan =
+    form.querySelector(".plan").value;
+
+  let nombre =
+    form.querySelector(".nombre").value;
+
+  let telefono =
+    form.querySelector(".telefono").value;
+
+  let pago =
+    form.querySelector(".pago").value;
 
   if(!plan || !nombre || !telefono || !pago){
+
     alert("Completa todos los campos");
     return;
   }
@@ -527,7 +548,7 @@ function enviar(){
 📱 Número: ${telefono}
 💳 Método: ${pago}
 
-Gracias 😊`;
+ Gracias ☺️`;
 
   window.location.href =
     "https://wa.me/5356789325?text=" +
@@ -535,5 +556,6 @@ Gracias 😊`;
 }
 
 </script>
+
 </body>
 </html>
