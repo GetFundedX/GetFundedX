@@ -249,31 +249,64 @@ border-left:3px solid #00D4FF;
 padding:12px;
 border-radius:8px;
 }
+
+.form-box{
+  padding:15px;
+  background:#0C142B;
+  border-radius:10px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.form-box input,
+.form-box select{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #1E2A44;
+  background:#111;
+  color:white;
+}
+
+.form-row td{
+  padding:0;
+}
+
+/* botón ya centrado arriba */
+
+.form-box{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform: translateY(-10px);
+  transition: all 0.35s ease;
+
+  width:320px;
+  margin:15px auto 0 auto;
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.form-box.active{
+  max-height:400px;
+  opacity:1;
+  transform: translateY(0);
+}
+
+.form-box input,
+.form-box select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #1E2A44;
+  background:#0C142B;
+  color:white;
+}
+
 </style>
 
 </head>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-const accItems = document.querySelectorAll(".accordion-item");
-
-accItems.forEach(item => {
-item.addEventListener("click", () => {
-
-accItems.forEach(i => {
-if(i !== item){
-i.classList.remove("active");
-}
-});
-
-item.classList.toggle("active");
-
-});
-});
-
-});
-</script>
 
 <body>
 
@@ -300,15 +333,15 @@ item.classList.toggle("active");
 <td>$49</td>
 <td>-60%</td>
 <td>-30%</td>
-<td><button class="btn">Comprar</button></td>
 </tr>
+
+
 
 <tr>
 <td>$200</td>
 <td>$98</td>
 <td>-60%</td>
 <td>-30%</td>
-<td><button class="btn">Comprar</button></td>
 </tr>
 
 <tr>
@@ -316,10 +349,42 @@ item.classList.toggle("active");
 <td>$245</td>
 <td>-60%</td>
 <td>-30%</td>
-<td><button class="btn">Comprar</button></td>
-</tr>
 
 </table>
+
+<div style="text-align:center; margin-top:20px;">
+  <button class="btn" onclick="toggleForm()">
+    Comprar ahora
+  </button>
+  <div id="formBox" class="form-box">
+
+  <select id="plan">
+    <option value="">Selecciona el plan</option>
+    <option value="Instant $100">Instant $100</option>
+    <option value="Instant $200">Instant $200</option>
+    <option value="Instant $500">Instant $500</option>
+  </select>
+
+  <input type="text" id="nombre" placeholder="Nombre">
+  <input type="text" id="telefono" placeholder="Número">
+
+  <select id="pago">
+    <option value="">Método de pago</option>
+    <option value="USDT">USDT</option>
+    <option value="CUP">CUP</option>
+  </select>
+
+<button class="btn" onclick="enviar()">
+  
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+       width="18"
+       style="vertical-align:middle; margin-right:8px;">
+
+  Enviar Pedido
+
+</button>
+
+</div>
 </div>
 
 <!-- INFO -->
@@ -413,16 +478,53 @@ Acceso a cuentas según evaluación:<br>
 </div>
 </div>
 
-<!-- CTA FINAL -->
-<div class="cta-final">
-<h2>Empieza hoy mismo</h2>
-<button class="btn">Comprar Cuenta</button>
-</div>
-
 <!-- VOLVER -->
 <div class="back">
 <a href="/GetFundedX/">Volver al inicio</a>
 </div>
+
+<script>
+
+function toggleForm(){
+  document.getElementById("formBox").classList.toggle("active");
+}
+
+document.addEventListener("click", function(e){
+
+  let form = document.getElementById("formBox");
+  let button = document.querySelector(".btn");
+
+  if(!form.contains(e.target) && e.target !== button){
+    form.classList.remove("active");
+  }
+
+});
+
+function enviar(){
+
+  let plan = document.getElementById("plan").value;
+  let nombre = document.getElementById("nombre").value;
+  let telefono = document.getElementById("telefono").value;
+  let pago = document.getElementById("pago").value;
+
+  if(!plan || !nombre || !telefono || !pago){
+    alert("Completa todos los campos");
+    return;
+  }
+
+let mensaje = `🟢 FUNDX Pedido
+
+🔥 Plan: ${plan}
+👤 Cliente: ${nombre}
+📱 Contacto: ${telefono}
+💳 Pago: ${pago}
+
+👌🏻 Gracias 😊`;
+
+  window.open("https://wa.me/+5356789325?text=" + encodeURIComponent(mensaje), "_blank");
+}
+
+</script>
 
 </body>
 </html>
