@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torneo de Trading - Clasificación</title>
+    <title>Torneo de Trading - FundedX</title>
     <style>
-        /* Estilos Base y Reset */
+        /* Estilos Globales - Dark Mode Premium */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,7 +19,7 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 10px;
         }
@@ -28,7 +28,7 @@
         header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 30px 0;
+            padding: 20px 0;
             border-bottom: 1px solid #1e2330;
         }
         header h1 {
@@ -43,107 +43,141 @@
             font-size: 1.1rem;
         }
 
-        /* Sección de Premios */
-        .prizes-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        /* PODIO DINÁMICO (Top 3) */
+        .podium-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
             margin-bottom: 50px;
-            align-items: center;
+            padding-top: 20px;
         }
-        .prize-card {
+        .podium-card {
             background: #161a22;
             border: 1px solid #2b3139;
             border-radius: 12px;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            width: 30%;
+            min-width: 200px;
+            transition: transform 0.3s ease;
+            position: relative;
         }
-        .prize-card:hover {
-            transform: translateY(-5px);
+        /* Alturas escalonadas para efecto de podio */
+        .podium-card.pos-1 { 
+            order: 2; 
+            height: 260px; 
+            border: 2px solid #f0b90b; 
+            background: linear-gradient(180deg, #1e1b10 0%, #161a22 100%);
         }
-        
-        /* Orden visual en escritorio (2do, 1ro, 3ro) */
-        .prize-card.first-place { border: 2px solid #f0b90b; background: linear-gradient(180deg, #1e1b10 0%, #161a22 100%); order: 1; }
-        .prize-card.second-place { order: 2; }
-        .prize-card.third-place { order: 3; }
-        
-        @media (min-width: 900px) {
-            .prize-card.first-place { order: 2; transform: scale(1.05); }
-            .prize-card.first-place:hover { transform: scale(1.05) translateY(-5px); }
-            .prize-card.second-place { order: 1; }
-            .prize-card.third-place { order: 3; }
-        }
+        .podium-card.pos-2 { order: 1; height: 220px; }
+        .podium-card.pos-3 { order: 3; height: 190px; }
 
-        /* Etiquetas de Puestos */
-        .badge {
+        .podium-badge {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
+            font-size: 0.8rem;
             text-transform: uppercase;
+            margin-bottom: 15px;
         }
-        .first-place .badge { background-color: #f0b90b; color: #000; }
-        .second-place .badge { background-color: #94a3b8; color: #000; }
-        .third-place .badge { background-color: #cd7f32; color: #000; }
+        .pos-1 .podium-badge { background-color: #f0b90b; color: #000; }
+        .pos-2 .podium-badge { background-color: #94a3b8; color: #000; }
+        .pos-3 .podium-badge { background-color: #cd7f32; color: #000; }
 
-        .prize-amount {
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-        .prize-details {
-            color: #848e9c;
-            font-size: 0.95rem;
-        }
-        .highlight {
-            color: #02c076;
+        .podium-name {
+            font-size: 1.2rem;
             font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .podium-metric {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #02c076;
+        }
+        .podium-metric.negative {
+            color: #f84f62;
+        }
+        .podium-prizes {
+            font-size: 0.85rem;
+            color: #848e9c;
+            margin-top: 10px;
+            border-top: 1px dashed #2b3139;
+            padding-top: 8px;
         }
 
-        /* Sección del Widget FXBlue */
-        .widget-section {
+        /* TABLA DE CLASIFICACIÓN GENERAL (Puestos 4 al 30) */
+        .leaderboard-section {
             background: #161a22;
             border: 1px solid #2b3139;
             border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 40px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .widget-section h2 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+        .leaderboard-section h2 {
+            font-size: 1.5rem;
             color: #f0b90b;
+            margin-bottom: 20px;
             text-align: center;
         }
         
-        /* Contenedor del Widget */
-        .fxblue-widget-container {
-            background: #0b0e14;
-            border: 2px dashed #2b3139;
-            border-radius: 8px;
-            padding: 40px 20px;
-            text-align: center;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .table-responsive {
+            overflow-x: auto;
         }
-        .placeholder-text {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #2b3139;
+        }
+        th {
             color: #848e9c;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .code-hint {
-            font-family: monospace;
-            background: #1e2330;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: #e2e8f0;
-            margin-top: 10px;
-            font-size: 0.85rem;
+        tbody tr:hover {
+            background-color: #1e2330;
+        }
+        
+        .col-rank { width: 10%; font-weight: bold; color: #848e9c; }
+        .col-name { width: 60%; font-weight: 600; }
+        .col-performance { width: 30%; text-align: right; font-weight: bold; }
+
+        /* Estados de carga y error */
+        .loading-status {
+            text-align: center;
+            padding: 40px;
+            color: #848e9c;
+            font-size: 1.1rem;
+        }
+        .error-status {
+            color: #f84f62;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsividad para pantallas pequeñas */
+        @media (max-width: 650px) {
+            .podium-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .podium-card {
+                width: 100%;
+                height: auto !important;
+            }
+            .podium-card.pos-1, .podium-card.pos-2, .podium-card.pos-3 {
+                order: initial;
+            }
         }
     </style>
 </head>
@@ -151,60 +185,146 @@
 
     <div class="container">
         
-        <!-- Encabezado -->
         <header>
-            <h1>Torneo de Trading</h1>
-            <p>Sigue la tabla de clasificación en tiempo real y compite por los primeros puestos</p>
+            <h1> 🏆 TORNEO 🏆</h1>
+            <p>Clasificación Oficial en 🟢 Vivo — Actualizado Automáticamente en cada Sesión 👨🏻‍💻</p>
         </header>
 
-        <!-- Tarjetas de Premios -->
-        <div class="prizes-container">
+        <div class="podium-container" id="podium-box">
+            </div>
+
+        <div class="leaderboard-section">
+            <h2>📊 Tabla de Posiciones</h2>
+            <div id="status-message" class="loading-status">Cargando datos del torneo...</div>
             
-            <!-- Segundo Lugar -->
-            <div class="prize-card second-place">
-                <div class="badge">2do Lugar</div>
-                <div class="prize-amount">Cuenta $100</div>
-                <div class="prize-details">Cuenta Real con <span class="highlight">Retiros Diarios</span> desde el primer día.</div>
+            <div class="table-responsive" id="table-box" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-rank">Pos</th>
+                            <th class="col-name">Trader / Cuenta</th>
+                            <th class="col-performance" style="text-align: right;">Retorno %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-rows">
+                        </tbody>
+                </table>
             </div>
-
-            <!-- Primer Lugar -->
-            <div class="prize-card first-place">
-                <div class="badge">1er Lugar</div>
-                <div class="prize-amount">Cuenta $300</div>
-                <div class="prize-details">Cuenta Real con <span class="highlight">Retiros Diarios</span> desde el primer día.</div>
-            </div>
-
-            <!-- Tercer Lugar -->
-            <div class="prize-card third-place">
-                <div class="badge">3er Lugar</div>
-                <div class="prize-amount">Cuenta 3K Base</div>
-                <div class="prize-details">Cuenta base/evaluación para iniciar tu proceso de fondeo.</div>
-            </div>
-
-        </div>
-
-        <!-- Tabla de Clasificación (FXBlue) -->
-        <div class="widget-section">
-            <h2>Clasificación en Vivo</h2>
-            
-            <div class="fxblue-widget-container">
-                <!-- REEMPLAZA ESTE BLOQUE POR TU CÓDIGO DE FXBLUE -->
-         <iframe
-    src="https://www.fxblue.com/fxbluechart.aspx?c=ch_cumulativeprofit&id=torneo300live"
-    frameborder="0"
-    width="400"
-    height="200"
->
-    <a href="//www.fxblue.com">
-      FX Blue - free tools and services for FX and CFD traders
-    </a>
-</iframe>
-                <!-- ------------------------------------------------- -->
-            </div>
-            
         </div>
 
     </div>
 
+    <script>
+        // =================================================================
+        // CONFIGURACIÓN: REEMPLAZA ESTO CON EL ID DE TU GOOGLE SHEETS
+        // =================================================================
+        const SPREADSHEET_ID = '1d_5zXLbrKg8GllpuY8j05JoEJkOwqWie4YS9m6wq6Q8'; 
+        
+        // Enlace automático para extraer los datos limpios
+        const jsonUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json`;
+
+        // Premios fijos configurados para FundedX
+        const prizeDetails = {
+            1: "Cuenta $300 + Retiros Diarios",
+            2: "Cuenta $100 + Retiros Diarios",
+            3: "Cuenta 3K Base"
+        };
+
+        async function loadLeaderboard() {
+            const statusMsg = document.getElementById('status-message');
+            const tableBox = document.getElementById('table-box');
+            const podiumBox = document.getElementById('podium-box');
+            const rowsContainer = document.getElementById('leaderboard-rows');
+
+            if (SPREADSHEET_ID === 'TU_ID_DE_GOOGLE_SHEETS_REAL_AQUÍ') {
+                statusMsg.innerHTML = `<span class="error-status">⚠️ Configuración pendiente: Debes poner el ID de tu Google Sheets en el código fuente.</span>`;
+                return;
+            }
+
+            try {
+                const response = await fetch(jsonUrl);
+                const text = await response.text();
+                
+                // Limpiar la envoltura de Google para obtener JSON puro
+                const jsonText = text.substring(47).slice(0, -2);
+                const data = JSON.parse(jsonText);
+                
+                const rows = data.table.rows;
+                let traders = [];
+
+                // Mapear filas (Columna A = Nombre, Columna B = Rendimiento)
+                rows.forEach(r => {
+                    const name = r.c[0] ? r.c[0].v : null;
+                    const performance = r.c[1] ? parseFloat(r.c[1].v) : 0;
+                    
+                    if (name) {
+                        traders.push({ name: name, performance: performance });
+                    }
+                });
+
+                // ORDENAR AUTOMÁTICAMENTE DE MAYOR A MENOR RENDIMIENTO
+                traders.sort((a, b) => b.performance - a.performance);
+
+                if (traders.length === 0) {
+                    statusMsg.innerHTML = "No se encontraron participantes registrados en la hoja.";
+                    return;
+                }
+
+                statusMsg.style.display = 'none';
+                tableBox.style.display = 'block';
+
+                // --- RENDERIZAR PODIO (TOP 3) ---
+                let podiumHtml = '';
+                for (let i = 0; i < 3; i++) {
+                    if (traders[i]) {
+                        const pos = i + 1;
+                        const isNegative = traders[i].performance < 0;
+                        const sign = traders[i].performance > 0 ? '+' : '';
+                        
+                        podiumHtml += `
+                            <div class="podium-card pos-${pos}">
+                                <div class="podium-badge">${pos}° Lugar</div>
+                                <div class="podium-name" title="${traders[i].name}">${traders[i].name}</div>
+                                <div class="podium-metric ${isNegative ? 'negative' : ''}">${sign}${traders[i].performance.toFixed(2)}%</div>
+                                <div class="podium-prizes">🎁 ${prizeDetails[pos] || 'Premio'}</div>
+                            </div>
+                        `;
+                    }
+                }
+                podiumBox.innerHTML = podiumHtml;
+
+                // --- RENDERIZAR TABLA GENERAL (PUESTOS 4 EN ADELANTE) ---
+                let tableRowsHtml = '';
+                for (let i = 0; i < traders.length; i++) {
+                    if (i >= 3) {
+                        const rank = i + 1;
+                        const isNegative = traders[i].performance < 0;
+                        const sign = traders[i].performance > 0 ? '+' : '';
+                        
+                        tableRowsHtml += `
+                            <tr>
+                                <td class="col-rank">#${rank}</td>
+                                <td class="col-name">${traders[i].name}</td>
+                                <td class="col-performance" style="text-align: right; color: ${isNegative ? '#f84f62' : '#02c076'};">
+                                    ${sign}${traders[i].performance.toFixed(2)}%
+                                </td>
+                            </tr>
+                        `;
+                    }
+                }
+                
+                if (traders.length <= 3) {
+                    tableRowsHtml = `<tr><td colspan="3" style="text-align:center; color:#848e9c;">Los demás competidores aparecerán aquí</td></tr>`;
+                }
+                rowsContainer.innerHTML = tableRowsHtml;
+
+            } catch (error) {
+                console.error(error);
+                statusMsg.innerHTML = `<span class="error-status">❌ Error al conectar con el torneo. Verifica que la hoja de Google Sheets sea pública.</span>`;
+            }
+        }
+
+        window.onload = loadLeaderboard;
+    </script>
 </body>
 </html>
