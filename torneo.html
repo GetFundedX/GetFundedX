@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneo de Trading - Clasificación</title>
+    <style>
+        /* Estilos Base y Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #0b0e14;
+            color: #ffffff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        /* Encabezado */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid #1e2330;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: #f0b90b;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        header p {
+            color: #848e9c;
+            font-size: 1.1rem;
+        }
+
+        /* Sección de Premios */
+        .prizes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+            align-items: center;
+        }
+        .prize-card {
+            background: #161a22;
+            border: 1px solid #2b3139;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .prize-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Orden visual en escritorio (2do, 1ro, 3ro) */
+        .prize-card.first-place { border: 2px solid #f0b90b; background: linear-gradient(180deg, #1e1b10 0%, #161a22 100%); order: 1; }
+        .prize-card.second-place { order: 2; }
+        .prize-card.third-place { order: 3; }
+        
+        @media (min-width: 900px) {
+            .prize-card.first-place { order: 2; transform: scale(1.05); }
+            .prize-card.first-place:hover { transform: scale(1.05) translateY(-5px); }
+            .prize-card.second-place { order: 1; }
+            .prize-card.third-place { order: 3; }
+        }
+
+        /* Etiquetas de Puestos */
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .first-place .badge { background-color: #f0b90b; color: #000; }
+        .second-place .badge { background-color: #94a3b8; color: #000; }
+        .third-place .badge { background-color: #cd7f32; color: #000; }
+
+        .prize-amount {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+        .prize-details {
+            color: #848e9c;
+            font-size: 0.95rem;
+        }
+        .highlight {
+            color: #02c076;
+            font-weight: 600;
+        }
+
+        /* Sección del Widget FXBlue */
+        .widget-section {
+            background: #161a22;
+            border: 1px solid #2b3139;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+        .widget-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #f0b90b;
+            text-align: center;
+        }
+        
+        /* Contenedor del Widget */
+        .fxblue-widget-container {
+            background: #0b0e14;
+            border: 2px dashed #2b3139;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .placeholder-text {
+            color: #848e9c;
+            font-size: 1rem;
+        }
+        .code-hint {
+            font-family: monospace;
+            background: #1e2330;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #e2e8f0;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Encabezado -->
+        <header>
+            <h1>Torneo de Trading</h1>
+            <p>Sigue la tabla de clasificación en tiempo real y compite por los primeros puestos</p>
+        </header>
+
+        <!-- Tarjetas de Premios -->
+        <div class="prizes-container">
+            
+            <!-- Segundo Lugar -->
+            <div class="prize-card second-place">
+                <div class="badge">2do Lugar</div>
+                <div class="prize-amount">Cuenta $100</div>
+                <div class="prize-details">Cuenta Real con <span class="highlight">Retiros Diarios</span> desde el primer día.</div>
+            </div>
+
+            <!-- Primer Lugar -->
+            <div class="prize-card first-place">
+                <div class="badge">1er Lugar</div>
+                <div class="prize-amount">Cuenta $300</div>
+                <div class="prize-details">Cuenta Real con <span class="highlight">Retiros Diarios</span> desde el primer día.</div>
+            </div>
+
+            <!-- Tercer Lugar -->
+            <div class="prize-card third-place">
+                <div class="badge">3er Lugar</div>
+                <div class="prize-amount">Cuenta 3K Base</div>
+                <div class="prize-details">Cuenta base/evaluación para iniciar tu proceso de fondeo.</div>
+            </div>
+
+        </div>
+
+        <!-- Tabla de Clasificación (FXBlue) -->
+        <div class="widget-section">
+            <h2>Clasificación en Vivo</h2>
+            
+            <div class="fxblue-widget-container">
+                <!-- REEMPLAZA ESTE BLOQUE POR TU CÓDIGO DE FXBLUE -->
+         <iframe
+    src="//www.fxblue.com/fxbluechart.aspx?c=ch_cumulativeprofit&id=torneo300live"
+    frameborder="0"
+    width="400"
+    height="200"
+>
+    <a href="//www.fxblue.com">
+      FX Blue - free tools and services for FX and CFD traders
+    </a>
+</iframe>
+                <!-- ------------------------------------------------- -->
+            </div>
+            
+        </div>
+
+    </div>
+
+</body>
+</html>
