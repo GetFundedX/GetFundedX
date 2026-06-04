@@ -15,16 +15,19 @@ color:white;
 
 /* HERO */
 header{
-padding:70px 20px 40px;
+padding:80px 20px 40px;
 text-align:center;
 background:radial-gradient(circle at top, #0B1B3A, #070B18);
+position:relative;
 }
 
 .logo-title{
-font-size:28px;
+font-size:32px;
 font-weight:bold;
 color:#00D4FF;
 margin-bottom:10px;
+letter-spacing: 1px;
+text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
 
 .subtitle{
@@ -32,31 +35,20 @@ font-size:15px;
 opacity:0.8;
 }
 
-/* BOTÓN VOLVER */
-.back{
-margin-top:20px;
-display:inline-block;
-padding:10px 18px;
-background:#1E2A44;
-color:white;
-border-radius:8px;
-text-decoration:none;
-font-size:13px;
-transition:0.2s;
-}
-
-.back:hover{
-background:#00D4FF;
-color:black;
-}
-
 /* TITULO */
 .section-title{
 text-align:center;
 font-size:26px;
 font-weight:bold;
-margin:50px 0 20px;
+margin:40px 0 10px;
 color:#00D4FF;
+}
+
+.section-subtitle{
+text-align:center;
+font-size:15px;
+opacity:0.75;
+margin-bottom:25px;
 }
 
 /* GRID */
@@ -65,146 +57,383 @@ display:flex;
 justify-content:center;
 gap:25px;
 flex-wrap:wrap;
-padding:30px 20px;
+padding:10px 20px 30px;
 }
 
-/* CARD */
+/* CARD / PLAN */
 .card{
 background:#0C142B;
 border:1px solid #1E2A44;
 border-radius:16px;
-width:260px;
-padding:28px;
+width:220px;
+padding:25px;
 text-align:center;
+cursor:pointer;
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-8px);
+transform:translateY(-5px);
 border-color:#00D4FF;
+box-shadow:0 0 10px #00D4FF22;
+}
+
+.card.active{
+border-color:#00D4FF;
+box-shadow:0 0 12px #00D4FF33;
 }
 
 .icon{
-font-size:36px;
-color:#00D4FF;
+font-size:32px;
+margin-bottom:5px;
 }
 
 .title{
-font-size:18px;
+font-size:20px;
 font-weight:bold;
-margin-top:10px;
+margin-top:5px;
+color:#ffffff;
 }
 
 .price{
 font-size:24px;
 font-weight:bold;
-margin:12px 0;
+margin:10px 0;
 color:#00D4FF;
 }
 
 .desc{
-font-size:14px;
-opacity:0.85;
-line-height:1.5;
-}
-.buy-btn{
-margin-top:15px;
-display:inline-block;
-padding:10px 14px;
-background:#00D4FF;
-color:#000;
-font-weight:bold;
-border-radius:10px;
-text-decoration:none;
 font-size:13px;
-transition:0.2s;
+opacity:0.85;
+line-height:1.6;
+}
+
+/* POPUP MODAL INTEGRADO */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(4, 7, 16, 0.8);
+backdrop-filter: blur(4px);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+z-index: 1000;
+}
+
+.modal-overlay.active {
+opacity: 1;
+pointer-events: auto;
+}
+
+.modal-content {
+background: #0C142B;
+border: 2px solid #1E2A44;
+border-radius: 16px;
+padding: 25px;
+width: 90%;
+max-width: 400px;
+text-align: center;
+box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
+transform: translateY(-20px);
+transition: transform 0.3s ease;
+max-height: 90vh;
+overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+width: 6px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+background: #1E2A44;
+border-radius: 4px;
+}
+
+.modal-overlay.active .modal-content {
+transform: translateY(0);
+}
+
+.modal-plan-title {
+font-size: 24px;
+color: #00D4FF;
+font-weight: bold;
+margin-bottom: 20px;
+border-bottom: 1px solid #1E2A44;
+padding-bottom: 10px;
+}
+
+.modal-metrics-container {
+transition: max-height 0.3s ease, opacity 0.2s ease;
+max-height: 500px;
+opacity: 1;
+overflow: hidden;
+}
+
+.modal-metrics-container.hide {
+max-height: 0;
+opacity: 0;
+margin-bottom: 0;
+}
+
+.modal-metric {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: #0A1125;
+padding: 12px 16px;
+border-radius: 10px;
+margin-bottom: 12px;
+border: 1px solid #1E2A44;
+}
+
+.modal-metric-label {
+display: flex;
+align-items: center;
+gap: 10px;
+font-weight: bold;
+font-size: 14px;
+color: #e0e0e0;
+}
+
+.modal-metric-value {
+font-size: 16px;
+font-weight: bold;
+color: #ffffff;
+}
+
+.modal-metric-value.objective {
+color: #39FF14;
+text-shadow: 0 0 5px rgba(57, 255, 20, 0.2);
+}
+
+.modal-metric-value.drawdown {
+color: #ff4d4d;
+text-shadow: 0 0 5px rgba(255, 77, 77, 0.2);
+}
+
+.modal-metric-value.highlight {
+color: #00D4FF;
+}
+
+/* BOTÓN COMPRA DENTRO DEL POPUP */
+.buy-btn{
+margin-top: 10px;
+display: block;
+width: 100%;
+background: #00D4FF;
+color: black;
+padding: 14px;
+border-radius: 10px;
+font-weight: bold;
+text-align: center;
+border: none;
+cursor: pointer;
+transition: 0.25s;
+font-size: 15px;
+box-sizing: border-box;
 }
 
 .buy-btn:hover{
-background:#00b6dd;
-transform:scale(1.03);
+transform: scale(1.02);
+box-shadow: 0 0 15px #00D4FF55;
 }
 
-/* BLOQUE INFO */
-.info-box{
-max-width:900px;
-margin:30px auto;
-background:#0C142B;
-border:1px solid #1E2A44;
-border-radius:14px;
-padding:25px;
-line-height:1.6;
-font-size:14px;
+.buy-btn.hide {
+display: none;
 }
 
-/* highlight azul */
-.blue{
-color:#00D4FF;
-font-weight:bold;
+.modal-close-btn {
+margin-top: 12px;
+background: #1E2A44;
+color: white;
+border: none;
+padding: 12px 20px;
+border-radius: 8px;
+cursor: pointer;
+font-weight: bold;
+width: 100%;
+font-size: 15px;
+transition: 0.2s;
 }
 
-/* FOOT NOTE */
+.modal-close-btn:hover {
+background: #ff4d4d;
+color: white;
+}
+
+/* FORMULARIO ADAPTADO AL MODAL */
+.formBox{
+max-height: 0;
+overflow: hidden;
+opacity: 0;
+transform: translateY(-10px);
+transition: 0.35s ease;
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 0;
+box-sizing: border-box;
+}
+
+.formBox.active{
+max-height: 500px;
+opacity: 1;
+transform: translateY(0);
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.formBox input,
+.formBox select{
+padding: 12px;
+border-radius: 10px;
+border: 1px solid #1E2A44;
+background: #081120;
+color: white;
+outline: none;
+font-size: 14px;
+}
+
+.formBox input:focus,
+.formBox select:focus{
+border-color: #00D4FF;
+}
+
+/* BOTÓN WHATSAPP */
+.send-btn{
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+background: #25D366;
+color: white;
+border: none;
+padding: 14px;
+border-radius: 10px;
+cursor: pointer;
+font-weight: bold;
+transition: 0.2s;
+font-size: 15px;
+}
+
+.send-btn:hover{
+transform: scale(1.02);
+}
+
+.send-btn img{
+width: 20px;
+}
+
+/* ACORDEÓN LLAMATIVO */
+.accordion {
+max-width: 750px;
+margin: 20px auto;
+padding: 0 20px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.accordion-item {
+background: #0C142B;
+border: 1px solid #1E2A44;
+border-radius: 12px;
+overflow: hidden;
+transition: 0.3s;
+}
+
+.accordion-item:hover {
+border-color: #00D4FF;
+}
+
+.accordion-header {
+padding: 20px;
+font-size: 16px;
+font-weight: bold;
+color: #00D4FF;
+background: #0A1125;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+background: #101A35;
+}
+
+.accordion-header::after {
+content: '\002B';
+font-size: 24px;
+transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-header::after {
+content: '\2212';
+transform: rotate(180deg);
+}
+
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+padding: 0 25px;
+line-height: 1.7;
+transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.accordion-item.active .accordion-content {
+max-height: 600px;
+padding: 25px;
+}
+
+.highlight-box{
+background: linear-gradient(135deg,#0C142B,#101A35);
+border-left: 3px solid #00D4FF;
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 10px;
+font-size: 14px;
+line-height: 1.7;
+}
+
+/* FOOT NOTE SEPARADA */
 .note{
-opacity:0.7;
-font-size:13px;
-margin-top:10px;
+text-align: center;
+max-width: 710px;
+margin: 30px auto 10px auto;
+padding: 0 20px;
+opacity: 0.6;
+font-size: 13.5px;
+line-height: 1.6;
 }
 
-.form-box{
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transform: translateY(-10px);
-  transition: all 0.35s ease;
-
-  width:320px;
-  margin:15px auto 0 auto;
-
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+/* VOLVER */
+.back{
+text-align: center;
+margin: 40px 0 60px 0;
 }
 
-.form-box.active{
-  max-height:500px;
-  opacity:1;
-  transform: translateY(0);
+.back a{
+color: white;
+text-decoration: none;
+border: 1px solid #1E2A44;
+padding: 10px 20px;
+border-radius: 10px;
+transition: 0.3s;
+font-size: 14px;
 }
 
-.form-box input,
-.form-box select{
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #1E2A44;
-  background:#0C142B;
-  color:white;
+.back a:hover{
+border-color: #00D4FF;
+color: #00D4FF;
 }
 
-/* mejora visual */
-.form-box button{
-  background:#00D4FF;
-  color:black;
-  border:none;
-  padding:10px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* BOTÃ“N */
-.btn{
-background:#00D4FF;
-border:none;
-padding:10px 16px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#00b6dd;
-transform:translateY(-2px);
-}
 </style>
 
 </head>
@@ -212,148 +441,260 @@ transform:translateY(-2px);
 <body>
 
 <header>
-
-<div class="logo-title">💰FundedX PRO</div>
-
+<div class="logo-title">🔥 Pro</div>
 <div class="subtitle">
 2 Fases → Evaluación estructurada con control de riesgo profesional
 </div>
-
-<a class="back" href="/GetFundedX/">← Volver al inicio</a>
-
 </header>
 
 <div class="section-title">PLANES DISPONIBLES</div>
 
+<!-- PLANES EN GRID -->
 <div class="grid">
 
-<div class="card">
+<div class="card" onclick="selectPlan(0)">
 <div class="icon">🟢</div>
 <div class="title">1K PRO</div>
 <div class="price">$12</div>
 <div class="desc">
-📉 EOD Drawdown: 10%<br>
-🎯 Objetivo: 10% / 5%
+📉 Drawdown Estático: 10%<br>
+🎯 Obj: 10% / 5%
+</div>
 </div>
 
-</div>
-
-<div class="card">
+<div class="card" onclick="selectPlan(1)">
 <div class="icon">🟡</div>
 <div class="title">2K PRO</div>
 <div class="price">$20</div>
 <div class="desc">
-📉 EOD Drawdown: 10%<br>
-🎯 Objetivo: 10% / 5%
-</div>
-
+📉 Drawdown Estático: 10%<br>
+🎯 Obj: 10% / 5%
 </div>
 </div>
 
 </div>
 
-<div style="text-align:center; margin-top:20px;">
-  <button class="btn" onclick="toggleForm()">
-    Comprar ahora 
-  </button>
+<!-- VENTANA POPUP MODAL PRO -->
+<div class="modal-overlay" id="planModal">
+<div class="modal-content">
+<div class="modal-plan-title" id="modalTitle">Cuenta</div>
+
+<!-- Contenedor de métricas -->
+<div id="modalMetricsContainer" class="modal-metrics-container">
+<div class="modal-metric">
+<div class="modal-metric-label">🎯 Objetivo Fase 1 (10%)</div>
+<div class="modal-metric-value objective" id="modalObjF1">$0</div>
 </div>
 
-<div id="formBox" class="form-box">
+<div class="modal-metric">
+<div class="modal-metric-label">🎯 Objetivo Fase 2 (5%)</div>
+<div class="modal-metric-value objective" id="modalObjF2">$0</div>
+</div>
 
-  <select id="plan">
-    <option value="">Selecciona el plan</option>
-    <option value="1K Pro">1K Pro</option>
-    <option value="2K Pro">2K Pro</option>
-  </select>
+<div class="modal-metric">
+<div class="modal-metric-label">📉 Drawdown Estático (10%)</div>
+<div class="modal-metric-value drawdown" id="modalDrawdown">$0</div>
+</div>
 
-  <input type="text" id="nombre" placeholder="Nombre">
-  <input type="text" id="telefono" placeholder="Número">
+<div class="modal-metric">
+<div class="modal-metric-label">⚖️ Regla Consistencia</div>
+<div class="modal-metric-value highlight">Máx 30% / día</div>
+</div>
 
-  <select id="pago">
-    <option value="">Método de pago</option>
-    <option value="USDT">USDT</option>
-    <option value="CUP">CUP</option>
-  </select>
+<div class="modal-metric">
+<div class="modal-metric-label">🛑 Stop Loss</div>
+<div class="modal-metric-value drawdown">Obligatorio</div>
+</div>
+</div>
 
-<button onclick="enviar()" 
-        style="display:flex; align-items:center; justify-content:center; gap:8px;">
-
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-       width="18"
-       alt="WhatsApp">
-
-  Enviar Pedido
-
+<!-- BOTÓN DE COMPRA PRINCIPAL -->
+<button class="buy-btn" id="modalBuyBtn" onclick="openFormInModal()">
+Compra ahora
 </button>
 
+<!-- FORMULARIO INTEGRADO -->
+<div class="formBox" id="formBox">
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="text" id="telefono" placeholder="Número">
+
+<select id="pago">
+<option value="">Método de pago</option>
+<option value="USDT">USDT</option>
+<option value="CUP">Transferencia CUP</option>
+</select>
+
+<button class="send-btn" onclick="enviarPedido()">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+Enviar Pedido
+</button>
+</div>
+
+<!-- BOTÓN DE ACCIÓN / CIERRE -->
+<button class="modal-close-btn" id="modalCloseBtn" onclick="closeModal()">Cerrar</button>
+</div>
 </div>
 
 <div class="section-title">CONDICIONES</div>
+<div class="section-subtitle" style="margin-bottom: 15px;">2 fases evaluación para acceder a Funded</div>
 
-<div class="info-box">
+<!-- ACORDEONES COMPLETOS -->
+<div class="accordion">
 
-🧩 <span class="blue">2 Fases de evaluación</span> para acceder a Funded.<br><br>
-
-📉 <span class="blue">EOD Drawdown 10%</span><br>
-Se calcula diariamente según el balance final del día, se bloquea al alcanzar el balance inicial.<br><br>
-
-⚖️ <span class="blue">Regla de consistencia 30%</span><br>
-Tu mejor día no puede representar más del 30% del total de ganancias de la evaluación.<br><br>
-
-📊 <span class="blue">Riesgo por operación</span>: máximo 2%<br>
-🛑 Stop Loss obligatorio (sin SL = cuenta perdida)<br><br>
-
-🧠 <span class="blue">Estructura del proceso</span><br>
-Fase 1: 10% Objetivo → Fase 2: 5% Objetivo → Cuenta Funded
-
-<div class="note">
-El objetivo es evaluar disciplina, consistencia y control de riesgo, no solo resultados rápidos.
+<div class="accordion-item">
+<div class="accordion-header">📉 Drawdown Estático</div>
+<div class="accordion-content">
+<div class="highlight-box">
+✔ El límite es del 10% de la cuenta.<br>
+</div>
+</div>
 </div>
 
+<div class="accordion-item">
+<div class="accordion-header">⚖️ Regla de Consistencia</div>
+<div class="accordion-content">
+<div class="highlight-box">
+✔ Consistencia fijada en el 30%.<br>
+❌ Tu mejor día operativo no puede representar más del 30% del total de las ganancias requeridas para superar la evaluación.
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">🛑 Gestión de Riesgo</div>
+<div class="accordion-content">
+<div class="highlight-box">
+🛑 Stop Loss obligatorio en absolutamente cada trade.<br>
+❌ Operar sin colocar Stop Loss causará la pérdida total e inmediata de la cuenta.
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">🧠 Estructura del Proceso</div>
+<div class="accordion-content">
+<div class="highlight-box">
+🧩 <strong>Fase 1:</strong> Lograr el 10% del Objetivo de ganancias.<br>
+🧩 <strong>Fase 2:</strong> Lograr el 5% del Objetivo de ganancias.<br>
+🚀 <strong>Fase Funded:</strong> Acceso directo a tu cuenta de fondeo oficial.
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- NOTA EXPLICATIVA SEPARADA -->
+<div class="note">
+💡 El objetivo es evaluar disciplina, consistencia y control de riesgo, no solo resultados rápidos.
+</div>
+
+<!-- BOTÓN VOLVER ABAJO -->
+<div class="back">
+<a href="index.html">Volver al inicio</a>
 </div>
 
 <script>
 
-function toggleForm(){
-  document.getElementById("formBox").classList.toggle("active");
+let selectedPlanName = "";
+
+// Datos calculados dinámicamente para las cuentas PRO (10% Fase 1, 5% Fase 2, 10% Drawdown)
+const planMetrics = [
+  { title: "Plan 1K PRO", objF1: "$100", objF2: "$50", drawdown: "$100", valueSelect: "1K Pro" },
+  { title: "Plan 2K PRO", objF1: "$200", objF2: "$100", drawdown: "$200", valueSelect: "2K Pro" }
+];
+
+const cards = document.querySelectorAll(".card");
+
+function selectPlan(i){
+cards.forEach(c => c.classList.remove("active"));
+cards[i].classList.add("active");
+
+selectedPlanName = planMetrics[i].valueSelect;
+
+// Restaurar visuales base del popup modal
+document.getElementById("modalMetricsContainer").classList.remove("hide");
+document.getElementById("modalBuyBtn").classList.remove("hide");
+document.getElementById("formBox").classList.remove("active");
+document.getElementById("modalCloseBtn").innerText = "Cerrar";
+
+// Inyectar valores numéricos exactos
+document.getElementById("modalTitle").innerText = planMetrics[i].title;
+document.getElementById("modalObjF1").innerText = planMetrics[i].objF1;
+document.getElementById("modalObjF2").innerText = planMetrics[i].objF2;
+document.getElementById("modalDrawdown").innerText = planMetrics[i].drawdown;
+
+// Desplegar modal overlay
+document.getElementById("planModal").classList.add("active");
 }
 
-// cerrar al tocar fuera
-document.addEventListener("click", function(e){
+function openFormInModal() {
+document.getElementById("modalMetricsContainer").classList.add("hide");
+document.getElementById("modalBuyBtn").classList.add("hide");
+document.getElementById("formBox").classList.add("active");
+document.getElementById("modalCloseBtn").innerText = "Volver atrás";
+}
 
-  let form = document.getElementById("formBox");
-  let button = document.querySelector(".btn");
+function closeModal() {
+const closeBtn = document.getElementById("modalCloseBtn");
+if (closeBtn.innerText === "Volver atrás") {
+    document.getElementById("modalMetricsContainer").classList.remove("hide");
+    document.getElementById("modalBuyBtn").classList.remove("hide");
+    document.getElementById("formBox").classList.remove("active");
+    closeBtn.innerText = "Cerrar";
+} else {
+    document.getElementById("planModal").classList.remove("active");
+}
+}
 
-  if(!form.contains(e.target) && e.target !== button){
-    form.classList.remove("active");
-  }
-
+// Cierre pasivo al hacer clic fuera del panel central
+document.getElementById("planModal").addEventListener("click", function(e) {
+if(e.target === this) {
+    document.getElementById("planModal").classList.remove("active");
+}
 });
 
-function enviar(){
+/* LÓGICA DEL ACORDEÓN */
+document.addEventListener("DOMContentLoaded", () => {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
 
-  let plan = document.getElementById("plan").value;
-  let nombre = document.getElementById("nombre").value;
-  let telefono = document.getElementById("telefono").value;
-  let pago = document.getElementById("pago").value;
+    accordionHeaders.forEach(header => {
+        header.addEventListener("click", () => {
+            const accordionItem = header.parentElement;
+            const isActive = accordionItem.classList.contains("active");
 
-  if(!plan || !nombre || !telefono || !pago){
-    alert("Completa todos los campos");
-    return;
-  }
+            document.querySelectorAll(".accordion-item").forEach(item => {
+                item.classList.remove("active");
+            });
 
-let mensaje = `🟢 FUNDX Pedido
+            if (!isActive) {
+                accordionItem.classList.add("active");
+            }
+        });
+    });
+});
 
-🔥 Plan: ${plan}
+/* ENVÍO POR WHATSAPP */
+function enviarPedido(){
+let nombre = document.getElementById("nombre").value;
+let telefono = document.getElementById("telefono").value;
+let pago = document.getElementById("pago").value;
+
+if(!nombre || !telefono || !pago){
+alert("Completa todos los campos");
+return;
+}
+
+let mensaje =
+`🟢 FUNDX Pedido
+
+🔥 Plan: ${selectedPlanName}
 👤 Cliente: ${nombre}
 📱 Contacto: ${telefono}
 💳 Pago: ${pago}
 
 👌🏻 Gracias 😊`;
 
-  window.location.href =
-    "https://wa.me/5356789325?text=" + encodeURIComponent(mensaje);
-
+window.location.href =
+"https://wa.me/5356789325?text=" + encodeURIComponent(mensaje);
 }
 
 </script>
