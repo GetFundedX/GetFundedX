@@ -32,7 +32,7 @@ opacity:0.8;
 font-size:16px;
 }
 
-/* TABLA */
+/* TABLA MODERNIZADA */
 .table-container{
 overflow-x:auto;
 padding:20px;
@@ -46,20 +46,25 @@ margin:auto;
 border-collapse:collapse;
 background:#0C142B;
 border:1px solid #1E2A44;
-border-radius:12px;
+border-radius:14px;
 overflow:hidden;
+box-shadow: 0 10px 30px rgba(0, 212, 255, 0.05);
 }
 
 .table th, .table td{
-padding:16px;
+padding:20px 16px;
 text-align:center;
 border-bottom:1px solid #1E2A44;
+vertical-align: middle;
 }
 
 .table th{
-background:#0A1125;
+background:linear-gradient(90deg, #0A1125, #101A35);
 color:#00D4FF;
 font-weight:bold;
+text-transform: uppercase;
+letter-spacing: 1px;
+font-size: 14px;
 }
 
 .table tr{
@@ -68,23 +73,60 @@ transition:0.3s;
 
 .table tr:hover{
 background:#101A35;
-transform:scale(1.01);
+transform:scale(1.02);
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.account-cell {
+font-size: 20px;
+font-weight: bold;
+color: #ffffff;
+}
+
+.price-cell {
+font-size: 18px;
+color: #e0e0e0;
+}
+
+.dd-cell {
+font-weight: bold;
+color: #ff4d4d;
+font-size: 18px;
+}
+
+/* ETIQUETA NEÓN */
+.badge-neon {
+display: inline-block;
+margin-top: 8px;
+padding: 4px 10px;
+font-size: 10px;
+font-weight: bold;
+color: #39FF14;
+background: rgba(57, 255, 20, 0.1);
+border: 1px solid #39FF14;
+border-radius: 6px;
+box-shadow: 0 0 8px rgba(57, 255, 20, 0.6), inset 0 0 4px rgba(57, 255, 20, 0.3);
+text-transform: uppercase;
+letter-spacing: 0.5px;
 }
 
 /* BOTÓN */
 .btn{
 background:#00D4FF;
 border:none;
-padding:10px 16px;
+padding:12px 24px;
 border-radius:8px;
 font-weight:bold;
+font-size: 16px;
 cursor:pointer;
 transition:0.3s;
+box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
 }
 
 .btn:hover{
 background:#00b6dd;
 transform:translateY(-2px);
+box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
 }
 
 /* INFO - ACORDEON */
@@ -182,6 +224,7 @@ transition:0.3s;
 .benefit:hover{
 transform:translateY(-6px);
 border-color:#00D4FF;
+box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1);
 }
 
 .benefit-title{
@@ -252,6 +295,7 @@ color:#00D4FF;
   border:1px solid #1E2A44;
   background:#0C142B;
   color:white;
+  font-size: 15px;
 }
 
 .wa-btn{
@@ -262,9 +306,17 @@ color:#00D4FF;
   background:#25D366;
   color:white;
   border:none;
-  padding:10px;
+  padding:12px;
   border-radius:8px;
   cursor:pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.wa-btn:hover {
+  background: #20ba59;
+  transform: scale(1.02);
 }
 
 /* ANIMACIONES */
@@ -283,42 +335,39 @@ to{opacity:1; transform:translateY(0);}
 
 <body>
 
-<!-- HERO -->
 <div class="hero">
 <h1>⚡Directo a Funded</h1>
 <p>Opera capital real desde el día 1 sin fases de evaluación</p>
 </div>
 
-<!-- TABLA -->
 <div class="table-container">
 <table class="table">
 <tr>
 <th>Cuenta</th>
 <th>Precio</th>
-<th>DD Final</th>
-<th>DD Diario</th>
+<th>Drawdown Diario</th>
 </tr>
 <tr>
-<td>$100</td>
-<td>$49</td>
-<td>-60%</td>
-<td>-30%</td>
+<td class="account-cell">
+  $100 <br>
+  <span class="badge-neon">Más popular</span>
+</td>
+<td class="price-cell">$49</td>
+<td class="dd-cell">-50%</td>
 </tr>
 <tr>
-<td>$200</td>
-<td>$98</td>
-<td>-60%</td>
-<td>-30%</td>
+<td class="account-cell">$200</td>
+<td class="price-cell">$98</td>
+<td class="dd-cell">-50%</td>
 </tr>
 <tr>
-<td>$500</td>
-<td>$245</td>
-<td>-60%</td>
-<td>-30%</td>
+<td class="account-cell">$500</td>
+<td class="price-cell">$245</td>
+<td class="dd-cell">-50%</td>
 </tr>
 </table>
 
-<div style="text-align:center; margin-top:20px;">
+<div style="text-align:center; margin-top:30px;">
   <button class="btn" onclick="toggleForm(this)">
     Comprar ahora
   </button>
@@ -342,21 +391,19 @@ to{opacity:1; transform:translateY(0);}
   </select>
 
   <button class="wa-btn" onclick="enviar(this)">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="18" alt="WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20" alt="WhatsApp">
     Enviar Pedido
   </button>
 </div>
 </div>
 
-<!-- INFO EN ACORDEÓN -->
 <div class="accordion">
 
-<!-- RETIROS -->
 <div class="accordion-item">
 <div class="accordion-header">💸 RETIROS DESDE EL DÍA 1</div>
 <div class="accordion-content">
 <div class="highlight-box">
-✔️ Mínimo de retiro: <strong>$50</strong><br><br>
+✔️ Mínimo de retiro en USDT: <strong>25$ / CUP Sin Limite: (Dentro del marco permisible de tranferencia de los Bancos y su disponibilidad )</strong><br><br>
 ✔️ Puedes retirar <strong>todo el profit generado por encima del valor de la cuenta</strong><br><br>
 💎 <strong>Profit Split:</strong><br>
 Comienzas en 50/50.<br><br>
@@ -368,24 +415,19 @@ Una vez retires el valor de la cuenta en ganancias netas:<br>
 </div>
 </div>
 
-<!-- DRAWDOWN -->
 <div class="accordion-item">
 <div class="accordion-header">📉 REGLAS DE DRAWDOWN</div>
 <div class="accordion-content">
 <div class="highlight-box">
-<strong>Drawdown Final (DF):</strong><br>
-No puedes perder más del 60% del balance inicial.<br>
-Si lo tocas = cuenta eliminada.<br><br>
 <strong>Drawdown Diario (DD):</strong><br>
 Solo aplica si estás por debajo del balance inicial.<br>
-Máximo -30% en un día.<br><br>
+Máximo <strong>-50%</strong> en un día.<br><br>
 Si estás en profit:<br>
 ✔️ No hay límite de pérdida diaria
 </div>
 </div>
 </div>
 
-<!-- RESTRICCIONES -->
 <div class="accordion-item">
 <div class="accordion-header">🚫 RESTRICCIONES</div>
 <div class="accordion-content">
@@ -402,7 +444,6 @@ Acceso a cuentas según evaluación:<br>
 
 </div>
 
-<!-- BENEFICIOS -->
 <div class="benefits">
 <div class="benefit">
 <div class="benefit-title">💸 Retiros rápidos</div>
@@ -422,7 +463,6 @@ Acceso a cuentas según evaluación:<br>
 </div>
 </div>
 
-<!-- VOLVER -->
 <div class="back">
 <a href="/GetFundedX/">Volver al inicio</a>
 </div>
@@ -431,7 +471,7 @@ Acceso a cuentas según evaluación:<br>
 // Lógica Formulario Compras
 function toggleForm(button){
   const form = button.parentElement.nextElementSibling;
-  
+
   // cerrar otros abiertos
   document.querySelectorAll(".formBox").forEach(f => {
     if(f !== form){
@@ -448,7 +488,7 @@ document.addEventListener("click", function(e){
   document.querySelectorAll(".formBox").forEach(form => {
     const buttonContainer = form.previousElementSibling;
     const button = buttonContainer ? buttonContainer.querySelector(".btn") : null;
-    
+
     if(
       !form.contains(e.target) && 
       button && !button.contains(e.target)
