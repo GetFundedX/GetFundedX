@@ -15,207 +15,439 @@ color:white;
 
 /* HERO */
 header{
-padding:70px 20px 40px;
+padding:80px 20px 40px;
 text-align:center;
 background:radial-gradient(circle at top, #0B1B3A, #070B18);
+position:relative;
 }
 
 .logo-title{
-font-size:28px;
+font-size:32px;
 font-weight:bold;
 color:#00D4FF;
+margin-bottom:10px;
+letter-spacing: 1px;
+text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
 
 .subtitle{
-font-size:14px;
+font-size:15px;
 opacity:0.8;
-margin-top:10px;
 }
 
-/* BOTÓN VOLVER */
-.back{
-margin-top:20px;
-display:inline-block;
-padding:10px 18px;
-background:#1E2A44;
-color:white;
-border-radius:8px;
-text-decoration:none;
-font-size:13px;
+/* TITULO */
+.section-title{
+text-align:center;
+font-size:26px;
+font-weight:bold;
+margin:40px 0 10px;
+color:#00D4FF;
 }
 
-.back:hover{
-background:#00D4FF;
-color:black;
+.section-subtitle{
+text-align:center;
+font-size:15px;
+opacity:0.75;
+margin-bottom:25px;
 }
 
 /* GRID */
 .grid{
 display:flex;
 justify-content:center;
-gap:20px;
+gap:25px;
 flex-wrap:wrap;
-padding:30px;
+padding:10px 20px 30px;
 }
 
+/* CARD / PLAN (ÚNICO 1K) */
 .card{
 background:#0C142B;
 border:1px solid #1E2A44;
 border-radius:16px;
-width:260px;
-padding:25px;
+width:250px;
+padding:30px;
 text-align:center;
+cursor:pointer;
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-6px);
+transform:translateY(-5px);
 border-color:#00D4FF;
+box-shadow:0 0 12px #00D4FF33;
 }
 
-.title{
-font-size:18px;
-font-weight:bold;
+.card.active{
+border-color:#00D4FF;
+box-shadow:0 0 15px #00D4FF44;
 }
 
-.price{
-color:#00D4FF;
-font-size:22px;
-margin:10px 0;
+.title-card {
+font-size: 15px;
+font-weight: bold;
+letter-spacing: 1px;
+opacity: 0.6;
+margin-bottom: 8px;
+}
+
+.plan{
+font-size: 28px;
+font-weight: 900;
+color: #ffffff;
+text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+margin-bottom: 12px;
+letter-spacing: 0.5px;
 }
 
 .desc{
 font-size:14px;
 opacity:0.85;
+line-height:1.6;
 }
 
-.plan{
-font-size:22px;
-font-weight:bold;
-color:#00D4FF;
-margin-bottom:8px;
+/* POPUP MODAL INTEGRADO */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(4, 7, 16, 0.8);
+backdrop-filter: blur(4px);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+z-index: 1000;
 }
 
-/* BOTÓN PRINCIPAL */
-.main-btn{
-display:block;
-margin:30px auto 10px;
-padding:14px 20px;
-background:#00D4FF;
-color:black;
-font-weight:bold;
-border:none;
-border-radius:10px;
-cursor:pointer;
-font-size:15px;
-transition:0.25s;
+.modal-overlay.active {
+opacity: 1;
+pointer-events: auto;
 }
 
-.main-btn:hover{
-transform:scale(1.03);
-box-shadow:0 0 15px #00D4FF33;
+.modal-content {
+background: #0C142B;
+border: 2px solid #1E2A44;
+border-radius: 16px;
+padding: 25px;
+width: 90%;
+max-width: 400px;
+text-align: center;
+box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
+transform: translateY(-20px);
+transition: transform 0.3s ease;
+max-height: 90vh;
+overflow-y: auto;
 }
 
-/* FORM */
+.modal-content::-webkit-scrollbar {
+width: 6px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+background: #1E2A44;
+border-radius: 4px;
+}
+
+.modal-overlay.active .modal-content {
+transform: translateY(0);
+}
+
+.modal-plan-title {
+font-size: 24px;
+color: #00D4FF;
+font-weight: bold;
+margin-bottom: 20px;
+border-bottom: 1px solid #1E2A44;
+padding-bottom: 10px;
+}
+
+.modal-metrics-container {
+transition: max-height 0.3s ease, opacity 0.2s ease;
+max-height: 650px;
+opacity: 1;
+overflow: hidden;
+}
+
+.modal-metrics-container.hide {
+max-height: 0;
+opacity: 0;
+margin-bottom: 0;
+}
+
+.modal-metric {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: #0A1125;
+padding: 12px 16px;
+border-radius: 10px;
+margin-bottom: 12px;
+border: 1px solid #1E2A44;
+text-align: left;
+}
+
+.modal-metric-label {
+display: flex;
+align-items: center;
+gap: 10px;
+font-weight: bold;
+font-size: 13.5px;
+color: #e0e0e0;
+}
+
+.modal-metric-value {
+font-size: 15px;
+font-weight: bold;
+color: #ffffff;
+white-space: nowrap;
+}
+
+.modal-metric-value.objective {
+color: #39FF14;
+text-shadow: 0 0 5px rgba(57, 255, 20, 0.2);
+}
+
+.modal-metric-value.drawdown {
+color: #ff4d4d;
+text-shadow: 0 0 5px rgba(255, 77, 77, 0.2);
+}
+
+.modal-metric-value.highlight {
+color: #00D4FF;
+}
+
+/* BOTÓN COMPRA DENTRO DEL POPUP */
+.buy-btn{
+margin-top: 10px;
+display: block;
+width: 100%;
+background: #00D4FF;
+color: black;
+padding: 14px;
+border-radius: 10px;
+font-weight: bold;
+text-align: center;
+border: none;
+cursor: pointer;
+transition: 0.25s;
+font-size: 15px;
+box-sizing: border-box;
+}
+
+.buy-btn:hover{
+transform: scale(1.02);
+box-shadow: 0 0 15px #00D4FF55;
+}
+
+.buy-btn.hide {
+display: none;
+}
+
+.modal-close-btn {
+margin-top: 12px;
+background: #1E2A44;
+color: white;
+border: none;
+padding: 12px 20px;
+border-radius: 8px;
+cursor: pointer;
+font-weight: bold;
+width: 100%;
+font-size: 15px;
+transition: 0.2s;
+}
+
+.modal-close-btn:hover {
+background: #ff4d4d;
+color: white;
+}
+
+/* FORMULARIO ADAPTADO AL MODAL */
 .formBox{
-max-width:350px;
-margin:10px auto 30px;
-
-max-height:0;
-overflow:hidden;
-opacity:0;
-transform:translateY(-10px);
-
-transition:0.35s ease;
-
-display:flex;
-flex-direction:column;
-gap:12px;
+max-height: 0;
+overflow: hidden;
+opacity: 0;
+transform: translateY(-10px);
+transition: 0.35s ease;
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 0;
+box-sizing: border-box;
 }
 
 .formBox.active{
-max-height:500px;
-opacity:1;
-transform:translateY(0);
+max-height: 500px;
+opacity: 1;
+transform: translateY(0);
+margin-top: 10px;
+margin-bottom: 10px;
 }
 
 .formBox input,
 .formBox select{
-padding:12px;
-border-radius:10px;
-border:1px solid #1E2A44;
-background:#0C142B;
-color:white;
+padding: 12px;
+border-radius: 10px;
+border: 1px solid #1E2A44;
+background: #081120;
+color: white;
+outline: none;
+font-size: 14px;
 }
 
+.formBox input:focus,
+.formBox select:focus{
+border-color: #00D4FF;
+}
+
+/* BOTÓN WHATSAPP */
 .send-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+background: #25D366;
+color: white;
+border: none;
+padding: 14px;
+border-radius: 10px;
+cursor: pointer;
+font-weight: bold;
+transition: 0.2s;
+font-size: 15px;
+}
 
-background:#25D366;
-color:white;
-
-border:none;
-padding:12px;
-border-radius:10px;
-
-cursor:pointer;
-font-weight:bold;
+.send-btn:hover{
+transform: scale(1.02);
 }
 
 .send-btn img{
-width:20px;
+width: 20px;
 }
 
-/* ACORDEÓN */
-.accordion{
-max-width:900px;
-margin:20px auto;
-padding:0 20px;
+/* ACORDEÓN MODERNO */
+.accordion {
+max-width: 750px;
+margin: 20px auto;
+padding: 0 20px;
+display: flex;
+flex-direction: column;
+gap: 15px;
 }
 
-.acc-item{
-background:#0C142B;
-border:1px solid #1E2A44;
-border-radius:10px;
-margin-bottom:10px;
-overflow:hidden;
+.accordion-item {
+background: #0C142B;
+border: 1px solid #1E2A44;
+border-radius: 12px;
+overflow: hidden;
+transition: 0.3s;
 }
 
-.acc-title{
-padding:15px;
-cursor:pointer;
-font-weight:bold;
-position:relative;
+.accordion-item:hover {
+border-color: #00D4FF;
 }
 
-.acc-title::after{
-content:"+";
-position:absolute;
-right:20px;
+.accordion-header {
+padding: 20px;
+font-size: 16px;
+font-weight: bold;
+color: #00D4FF;
+background: #0A1125;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: background 0.3s ease;
 }
 
-.acc-item.active .acc-title::after{
-content:"-";
+.accordion-header:hover {
+background: #101A35;
 }
 
-.acc-content{
-max-height:0;
-overflow:hidden;
-padding:0 15px;
-opacity:0;
-transition:all 0.3s ease;
-font-size:14px;
-line-height:1.6;
+.accordion-header::after {
+content: '\002B';
+font-size: 24px;
+transition: transform 0.3s ease;
 }
 
-.acc-item.active .acc-content{
-max-height:500px;
-padding:15px;
-opacity:0.9;
+.accordion-item.active .accordion-header::after {
+content: '\2212';
+transform: rotate(180deg);
 }
+
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+padding: 0 25px;
+line-height: 1.7;
+transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.accordion-item.active .accordion-content {
+max-height: 600px;
+padding: 25px;
+}
+
+.highlight-box{
+background: linear-gradient(135deg,#0C142B,#101A35);
+border-left: 3px solid #00D4FF;
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 10px;
+font-size: 14px;
+line-height: 1.7;
+}
+
+/* TEXTO CÓMO FUNCIONA APARTE */
+.how-it-works-box {
+max-width: 710px;
+margin: 40px auto 10px auto;
+padding: 20px;
+background: #0C142B;
+border: 1px dashed #1E2A44;
+border-radius: 14px;
+text-align: center;
+}
+
+.how-it-works-title {
+font-size: 18px;
+font-weight: bold;
+color: #00D4FF;
+margin-bottom: 10px;
+}
+
+.how-it-works-text {
+font-size: 14px;
+opacity: 0.85;
+line-height: 1.6;
+}
+
+/* VOLVER AL FONDO */
+.back{
+text-align: center;
+margin: 30px 0 60px 0;
+}
+
+.back a{
+color: white;
+text-decoration: none;
+border: 1px solid #1E2A44;
+padding: 10px 20px;
+border-radius: 10px;
+transition: 0.3s;
+font-size: 14px;
+display: inline-block;
+}
+
+.back a:hover{
+border-color: #00D4FF;
+color: #00D4FF;
+}
+
 </style>
 
 </head>
@@ -223,191 +455,241 @@ opacity:0.9;
 <body>
 
 <header>
-
-<div class="logo-title">🎁 FundedX FLEX</div>
-
+<div class="logo-title">⚡ Flex</div>
 <div class="subtitle">
 Empieza con poco y paga solo cuando avanzas.
 </div>
-
-<a class="back" href="/GetFundedX/">← Volver al inicio</a>
-
 </header>
 
-<!-- CARDS SIN BOTONES -->
+<div class="section-title">PLANES DISPONIBLES</div>
 
+<!-- GRID SOLO CON 1K FLEX -->
 <div class="grid">
 
-<div class="card">
-<div class="title">💎 FundedX FLEX</div>
-<div class="plan">1K</div>
+<div class="card" onclick="openPlanModal()">
+<div class="title-card">CUENTA</div>
+<div class="plan">1K FLEX</div>
+<div class="price">Evaluación</div>
 <div class="desc">
-📉 (EOD) TD: 10%<br>
-🎯 10% / 5%
-</div>
-</div>
-
-<div class="card">
-<div class="title">💎 FundedX FLEX</div>
-<div class="plan">2K</div>
-<div class="desc">
-📉 (EOD) TD: 10%<br>
-🎯 10% / 5%
-</div>
-</div>
-
-<div class="card">
-<div class="title">💎 FundedX FLEX</div>
-<div class="plan">5K</div>
-<div class="desc">
-📉 (EOD) TD: 10%<br>
-🎯 10% / 5%
+📉 Drawdown Estático: 10%<br>
+🎯 Obj: 10% / 5%
 </div>
 </div>
 
 </div>
 
-<!-- BOTÓN ÚNICO -->
+<!-- VENTANA POPUP MODAL FLEX -->
+<div class="modal-overlay" id="planModal">
+<div class="modal-content">
+<div class="modal-plan-title">Plan 1K FLEX</div>
 
-<button class="main-btn" onclick="toggleForm()">
+<!-- Contenedor de métricas -->
+<div id="modalMetricsContainer" class="modal-metrics-container">
+<div class="modal-metric">
+<div class="modal-metric-label">🎯 Objetivo Fase 1 (10%)</div>
+<div class="modal-metric-value objective">$100</div>
+</div>
+
+<div class="modal-metric">
+<div class="modal-metric-label">🎯 Objetivo Fase 2 (5%)</div>
+<div class="modal-metric-value objective">$50</div>
+</div>
+
+<div class="modal-metric">
+<div class="modal-metric-label">📉 Drawdown Estático (10%)</div>
+<div class="modal-metric-value drawdown">$100</div>
+</div>
+
+<div class="modal-metric">
+<div class="modal-metric-label">🟢 Pago Fase 1 aprobada</div>
+<div class="modal-metric-value highlight">$10</div>
+</div>
+
+<div class="modal-metric">
+<div class="modal-metric-label">🟡 Pago Fase 2 aprobada</div>
+<div class="modal-metric-value highlight">$15</div>
+</div>
+
+<!-- NUEVA SECCIÓN AGREGADA -->
+<div class="modal-metric">
+<div class="modal-metric-label">🔄 Reset de Fase Dos</div>
+<div class="modal-metric-value highlight">$5</div>
+</div>
+
+<div class="modal-metric">
+<div class="modal-metric-label">⚖️ Regla Consistencia</div>
+<div class="modal-metric-value highlight">Máx 50% / día</div>
+</div>
+
+<div class="modal-metric">
+<div class="modal-metric-label">🛑 Stop Loss</div>
+<div class="modal-metric-value drawdown">Obligatorio</div>
+</div>
+</div>
+
+<!-- BOTÓN DE COMPRA PRINCIPAL -->
+<button class="buy-btn" id="modalBuyBtn" onclick="openFormInModal()">
 Compra ahora
 </button>
 
-<!-- FORMULARIO -->
-
+<!-- FORMULARIO INTEGRADO -->
 <div class="formBox" id="formBox">
-
-<select id="plan">
-<option value="">Selecciona el plan</option>
-<option value="1K FLEX">1K Flex</option>
-<option value="2K FLEX">2K Flex</option>
-<option value="5K FLEX">5K Flex</option>
-</select>
-
 <input type="text" id="nombre" placeholder="Nombre">
 <input type="text" id="telefono" placeholder="Número">
 
 <select id="pago">
 <option value="">Método de pago</option>
 <option value="USDT">USDT</option>
-<option value="CUP">CUP</option>
+<option value="CUP">Transferencia CUP</option>
 </select>
 
-<button class="send-btn" onclick="enviar()">
-
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-
+<button class="send-btn" onclick="enviarPedido()">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 Enviar Pedido
-
 </button>
-
 </div>
 
-<!-- ACORDEÓN -->
+<!-- BOTÓN DE ACCIÓN / CIERRE -->
+<button class="modal-close-btn" id="modalCloseBtn" onclick="closeModal()">Cerrar</button>
+</div>
+</div>
+
+<div class="section-title">CONDICIONES</div>
+<div class="section-subtitle" style="margin-bottom: 15px;">Evaluación estructurada flexible de bajo costo</div>
+
+<!-- ACORDEONES COMPLETOS -->
 <div class="accordion">
 
-<div class="acc-item">
-<div class="acc-title">💳 Costos del programa</div>
-<div class="acc-content">
+<div class="accordion-item">
+<div class="accordion-header">💳 Costos del programa</div>
+<div class="accordion-content">
+<div class="highlight-box">
+<strong>🟢 Fase 1 (pagas al aprobar)</strong><br>
+• Cuenta 1K → $10<br>
+• Intentos ilimitados (con un margen de 24h entre intentos)<br><br>
 
-🟢 <b>Fase 1 (pagas al aprobar)</b><br>
-1K → $10<br>
-2K → $20<br>
-5K → $50<br><br>
+<strong>🟡 Fase 2 (pagas al aprobar)</strong><br>
+• Cuenta 1K → $15<br>
+• Incluye 2 intentos gratis.<br>
+• Reset adicional en Fase 2 → $5 (Máximo 3 resets).<br><br>
 
-♻️ Intentos ilimitados<br>
-⏱️ 24h entre intentos<br><br>
-
-🟡 <b>Fase 2 (pagas al aprobar)</b><br>
-1K → $15<br>
-2K → $30<br>
-5K → $75<br><br>
-
-👉 2 intentos gratis<br>
-🔄 Reset adicional:<br>
-1K → $5<br>
-2K → $10<br>
-5K → $25<br><br>
-
-❗Máximo 3 resets<br><br>
-
-💎Al pasar la primera fase,quedas anlcado en la segunda fase (hasta consumir tus intentos y resets), los resets reinician a la segunda fase, no vuelves a la primera.
-
+💎 <em>Al pasar la primera fase, quedas anclado en la segunda fase (hasta consumir tus intentos y resets). Los resets reinician la segunda fase, nunca vuelves a empezar desde la primera.</em>
+</div>
 </div>
 </div>
 
-<div class="acc-item">
-<div class="acc-title">📉 Reglas de Trading</div>
-<div class="acc-content">
-
-📉 Trailing Drawdown (EOD): 10%<br>
-Se bloquea al alcanzar el balance inicial<br><br>
-
-⚖️ Regla de consistencia: 50%<br>
-Tu mejor día no puede superar el 50% del objetivo<br><br>
-
-📊 Riesgo por trade: máximo 2%<br>
-🛑 Stop Loss obligatorio<br>
-❌ Sin SL → pérdida de la cuenta
-
+<div class="accordion-item">
+<div class="accordion-header">📉 Reglas de Trading</div>
+<div class="accordion-content">
+<div class="highlight-box">
+✔ <strong>Drawdown Estático:</strong> 10% del balance de la cuenta. Se bloquea de forma segura al alcanzar el balance inicial.<br>
+✔ <strong>Regla de Consistencia:</strong> 50%. Tu mejor día operativo no puede superar el 50% del objetivo total.<br>
+🛑 <strong>Stop Loss:</strong> Obligatorio en cada operación. Entradas sin SL provocan la pérdida de la cuenta.
+</div>
 </div>
 </div>
 
-<div class="acc-item">
-<div class="acc-title">🧠 Cómo funciona</div>
-<div class="acc-content">
-Sistema de bajo riesgo inicial con escalado progresivo.
+</div>
+
+<!-- CÓMO FUNCIONA COMO TEXTO APARTE -->
+<div class="how-it-works-box">
+<div class="how-it-works-title">🧠 Cómo funciona</div>
+<div class="how-it-works-text">
+Un sistema revolucionario de bajo riesgo inicial con escalado progresivo. No arriesgas grandes capitales de entrada, avanzas a tu propio ritmo y pagas de forma justa únicamente al validar cada fase operativa con éxito.
 </div>
 </div>
 
+<!-- BOTÓN VOLVER ABAJO -->
+<div class="back">
+<a href="index.html">Volver al inicio</a>
 </div>
 
 <script>
 
-/* ACORDEÓN */
-const items = document.querySelectorAll(".acc-item");
+// Manejo del modal único para 1K Flex
+function openPlanModal(){
+document.querySelector(".card").classList.add("active");
 
-items.forEach(item=>{
-item.addEventListener("click", ()=>{
-items.forEach(i=>{
-if(i!==item) i.classList.remove("active");
-});
-item.classList.toggle("active");
-});
-});
+// Restaurar visuales base del popup modal
+document.getElementById("modalMetricsContainer").classList.remove("hide");
+document.getElementById("modalBuyBtn").classList.remove("hide");
+document.getElementById("formBox").classList.remove("active");
+document.getElementById("modalCloseBtn").innerText = "Cerrar";
 
-/* FORM */
-function toggleForm(){
-document.getElementById("formBox").classList.toggle("active");
+// Desplegar modal overlay
+document.getElementById("planModal").classList.add("active");
 }
 
-/* WHATSAPP */
-function enviar(){
+function openFormInModal() {
+document.getElementById("modalMetricsContainer").classList.add("hide");
+document.getElementById("modalBuyBtn").classList.add("hide");
+document.getElementById("formBox").classList.add("active");
+document.getElementById("modalCloseBtn").innerText = "Volver atrás";
+}
 
-let plan = document.getElementById("plan").value;
+function closeModal() {
+const closeBtn = document.getElementById("modalCloseBtn");
+if (closeBtn.innerText === "Volver atrás") {
+    document.getElementById("modalMetricsContainer").classList.remove("hide");
+    document.getElementById("modalBuyBtn").classList.remove("hide");
+    document.getElementById("formBox").classList.remove("active");
+    closeBtn.innerText = "Cerrar";
+} else {
+    document.getElementById("planModal").classList.remove("active");
+    document.querySelector(".card").classList.remove("active");
+}
+}
+
+// Cierre pasivo al hacer clic fuera del panel central
+document.getElementById("planModal").addEventListener("click", function(e) {
+if(e.target === this) {
+    closeModal();
+}
+});
+
+/* LÓGICA DEL ACORDEÓN */
+document.addEventListener("DOMContentLoaded", () => {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener("click", () => {
+            const accordionItem = header.parentElement;
+            const isActive = accordionItem.classList.contains("active");
+
+            document.querySelectorAll(".accordion-item").forEach(item => {
+                item.classList.remove("active");
+            });
+
+            if (!isActive) {
+                accordionItem.classList.add("active");
+            }
+        });
+    });
+});
+
+/* ENVÍO POR WHATSAPP */
+function enviarPedido(){
 let nombre = document.getElementById("nombre").value;
 let telefono = document.getElementById("telefono").value;
 let pago = document.getElementById("pago").value;
 
-if(!plan || !nombre || !telefono || !pago){
+if(!nombre || !telefono || !pago){
 alert("Completa todos los campos");
 return;
 }
 
-let msg =
-`🟢 FUNDX ORDER
+let mensaje =
+`🟢 FUNDX Pedido
 
-📦 Plan: ${plan}
-👤 Nombre: ${nombre}
-📱 Número: ${telefono}
-💳 Método: ${pago}
+⚡ Plan: 1K FLEX
+👤 Cliente: ${nombre}
+📱 Contacto: ${telefono}
+💳 Pago: ${pago}
 
- Gracias😊`;
+👌🏻 Gracias 😊`;
 
 window.location.href =
-"https://wa.me/5356789325?text=" +
-encodeURIComponent(msg);
-
+"https://wa.me/5356789325?text=" + encodeURIComponent(mensaje);
 }
 
 </script>
