@@ -13,60 +13,166 @@ background:#070B18;
 color:white;
 }
 
-/* CONTENEDOR */
+/* CONTENEDOR PRINCIPAL */
 .container{
 max-width:900px;
-margin:60px auto;
+margin:60px auto 20px;
 padding:30px;
 background:#0C142B;
 border:1px solid #1E2A44;
 border-radius:14px;
 line-height:1.7;
+box-shadow: 0 10px 30px rgba(0, 212, 255, 0.03);
 }
 
 /* TITULOS */
 h1{
 color:#00D4FF;
 text-align:center;
-margin-bottom:30px;
+margin-bottom:20px;
+font-size: 32px;
 }
 
-.rule{
-margin-bottom:25px;
-padding-bottom:15px;
-border-bottom:1px solid #1E2A44;
+.intro-text {
+text-align: center;
+opacity: 0.85;
+font-size: 16px;
+max-width: 750px;
+margin: 0 auto 40px;
 }
 
-.rule-title{
-color:#00D4FF;
-font-weight:bold;
-margin-bottom:10px;
+/* ACORDEÓN LLAMATIVO */
+.accordion {
+display: flex;
+flex-direction: column;
+gap: 15px;
+margin-bottom: 40px;
 }
 
-.rule ul{
-margin-left:20px;
-opacity:0.9;
+.accordion-item {
+background: #0C142B;
+border: 1px solid #1E2A44;
+border-radius: 12px;
+overflow: hidden;
+transition: 0.3s;
+}
+
+.accordion-item:hover {
+border-color: #00D4FF;
+}
+
+.accordion-header {
+padding: 20px;
+font-size: 17px;
+font-weight: bold;
+color: #00D4FF;
+background: #0A1125;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+background: #101A35;
+}
+
+.accordion-header::after {
+content: '\002B'; /* Símbolo + */
+font-size: 22px;
+transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-header::after {
+content: '\2212'; /* Símbolo - */
+transform: rotate(180deg);
+}
+
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+padding: 0 25px;
+line-height: 1.7;
+transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.accordion-item.active .accordion-content {
+max-height: 500px; /* Altura suficiente */
+padding: 25px;
+}
+
+.highlight-box {
+background: linear-gradient(135deg, #0C142B, #101A35);
+border-left: 3px solid #00D4FF;
+padding: 20px;
+border-radius: 8px;
+}
+
+.highlight-box ul {
+margin: 10px 0 15px 20px;
+padding: 0;
+}
+
+.highlight-box li {
+margin-bottom: 8px;
+opacity: 0.9;
+}
+
+.highlight-box p:last-child {
+margin-bottom: 0;
+}
+
+/* SECCIÓN OBJETIVO DESTACADA */
+.program-objective {
+background: linear-gradient(135deg, #0A1125, #142244);
+border: 1px solid #1E2A44;
+border-radius: 14px;
+padding: 30px;
+margin-top: 40px;
+position: relative;
+overflow: hidden;
+box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.05);
+}
+
+.program-objective h2 {
+color: #00D4FF;
+margin-top: 0;
+font-size: 22px;
+margin-bottom: 15px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.program-objective p {
+margin: 0;
+opacity: 0.9;
+font-size: 15px;
+line-height: 1.8;
 }
 
 /* BOTÓN VOLVER */
 .back{
 text-align:center;
-margin-top:30px;
+margin: 40px 0 60px;
 }
 
 .back a{
 display:inline-block;
-padding:10px 18px;
+padding:12px 24px;
 border:1px solid #1E2A44;
 border-radius:10px;
 color:white;
 text-decoration:none;
+font-weight: bold;
 transition:0.3s;
 }
 
 .back a:hover{
 border-color:#00D4FF;
 color:#00D4FF;
+box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
 }
 </style>
 
@@ -78,105 +184,128 @@ color:#00D4FF;
 
 <h1>🔥 Reglas de Trading</h1>
 
-<p>
+<p class="intro-text">
 El incumplimiento de cualquiera de las siguientes reglas puede resultar en la pérdida de la cuenta, los fondos y la elegibilidad para participar en los programas de FundedX.
 </p>
 
-<div class="rule">
-<div class="rule-title">📊 1. Regla de Consistencia</div>
-<p>
-La regla de consistencia no descalifica automáticamente al trader.
-Sin embargo, se utiliza para evaluar la estabilidad del rendimiento y evitar comportamientos de alto riesgo o tipo “casino”.
-FundedX prioriza traders consistentes sobre resultados puntuales o ganancias impulsivas.
-</p>
-</div>
+<!-- ACORDEÓN DE REGLAS -->
+<div class="accordion">
 
-<div class="rule">
-<div class="rule-title">📉 2. Pérdida Máxima Total</div>
-<p>
-El trader no debe alcanzar ni superar el límite de pérdida máxima establecido en su cuenta.
-Superar este nivel implica la terminación inmediata de la cuenta.
-</p>
-</div>
+    <!-- REGLA 1 -->
+    <div class="accordion-item">
+        <div class="accordion-header">📊 1. Regla de Consistencia</div>
+        <div class="accordion-content">
+            <div class="highlight-box">
+                <p>
+                La regla de consistencia no descalifica automáticamente al trader.
+                Sin embargo, se utiliza para evaluar la estabilidad del rendimiento y evitar comportamientos de alto riesgo o tipo “casino”.
+                FundedX prioriza traders consistentes sobre resultados puntuales o ganancias impulsivas.
+                </p>
+            </div>
+        </div>
+    </div>
 
-<div class="rule">
-<div class="rule-title">📅 3. Pérdida Diaria (Solo en Funded)</div>
-<p>
-En cuentas fondeadas, el trader no debe alcanzar la pérdida diaria máxima permitida.
-Este límite se calcula en base al balance inicial o al equity, según las condiciones del programa.
-El incumplimiento implica la pérdida de la cuenta.
-</p>
-</div>
+    <!-- REGLA 2 -->
+    <div class="accordion-item">
+        <div class="accordion-header">📉 2. Pérdida Máxima Total</div>
+        <div class="accordion-content">
+            <div class="highlight-box">
+                <p>
+                El trader no debe alcanzar ni superar el límite de pérdida máxima establecido en su cuenta.
+                Superar este nivel implica la terminación inmediata de la cuenta.
+                </p>
+            </div>
+        </div>
+    </div>
 
-<div class="rule">
-<div class="rule-title">🛑 4. Stop Loss Obligatorio</div>
-<p>
-Todas las operaciones deben contar con un Stop Loss definido.
-Operar sin gestión de riesgo adecuada se considera una violación directa de las reglas.
-</p>
-</div>
+    <!-- REGLA 3 -->
+    <div class="accordion-item">
+        <div class="accordion-header">🛑 3. Stop Loss Obligatorio</div>
+        <div class="accordion-content">
+            <div class="highlight-box">
+                <p>
+                Todas las operaciones deben contar con un Stop Loss definido.
+                Operar sin gestión de riesgo adecuada se considera una violación directa de las reglas.
+                </p>
+            </div>
+        </div>
+    </div>
 
-<div class="rule">
-<div class="rule-title">🎲 5. Comportamientos Tipo Casino</div>
-<ul>
-<li>Estrategias “all-in” (todo o nada)</li>
-<li>Sobreapalancamiento sin gestión de riesgo</li>
-<li>Operaciones impulsivas sin análisis</li>
-</ul>
-<p>
-FundedX busca traders disciplinados, no comportamientos especulativos extremos.
-</p>
-</div>
+    <!-- REGLA 4 -->
+    <div class="accordion-item">
+        <div class="accordion-header">🎲 4. Comportamientos Tipo Casino</div>
+        <div class="accordion-content">
+            <div class="highlight-box">
+                <ul>
+                    <li>Estrategias “all-in” (todo o nada)</li>
+                    <li>Sobreapalancamiento sin gestión de riesgo</li>
+                    <li>Operaciones impulsivas sin análisis</li>
+                </ul>
+                <p>
+                FundedX busca traders disciplinados, no comportamientos especulativos extremos.
+                </p>
+            </div>
+        </div>
+    </div>
 
-<div class="rule">
-<div class="rule-title">⚖️ 6. Riesgo por Operación</div>
-<p>
-Durante la fase de evaluación, el riesgo máximo recomendado es del <strong>2% por operación</strong>.
-</p>
-
-<p>
-En cuentas fondeadas, el riesgo por operación está limitado de la siguiente forma:
-</p>
-
-<p>
-<strong>Por cada $100 de capital, el trader puede arriesgar un máximo de $20 en una sola operación.</strong>
-</p>
-
-<ul>
-<li>Cuenta de $200 → riesgo máximo por trade: $40</li>
-<li>Cuenta de $500 → riesgo máximo por trade: $100</li>
-</ul>
-
-<p>
-El objetivo de esta regla es permitir flexibilidad operativa manteniendo un control estructurado del riesgo.
-</p>
-</div>
-
-<div class="rule">
-<div class="rule-title">🧠 7. Integridad del Trading</div>
-<ul>
-<li>Manipular resultados</li>
-<li>Usar múltiples cuentas para evadir reglas</li>
-<li>Cualquier intento de explotar el sistema</li>
-</ul>
-<p>
-Cualquier actividad sospechosa resultará en la descalificación inmediata.
-</p>
-</div>
-
-<div class="rule">
-<div class="rule-title">🎯 Objetivo del Programa</div>
-<p>
-FundedX está diseñado para identificar traders consistentes, disciplinados y capaces de gestionar riesgo de forma profesional.
-El objetivo no es generar ganancias rápidas, sino construir rendimiento sostenible en el tiempo.
-</p>
-</div>
+    <!-- REGLA 5 -->
+    <div class="accordion-item">
+        <div class="accordion-header">🧠 5. Integridad del Trading</div>
+        <div class="accordion-content">
+            <div class="highlight-box">
+                <ul>
+                    <li>Manipular resultados</li>
+                    <li>Usar múltiples cuentas para evadir reglas</li>
+                    <li>Cualquier intento de explotar el sistema</li>
+                </ul>
+                <p>
+                Cualquier actividad sospechosa resultará en la descalificación inmediata.
+                </p>
+            </div>
+        </div>
+    </div>
 
 </div>
 
+<!-- OBJETIVO DEL PROGRAMA SEPARADO -->
+<div class="program-objective">
+    <h2>🎯 Objetivo del Programa</h2>
+    <p>
+    FundedX está diseñado para identificar traders consistentes, disciplinados y capaces de gestionar riesgo de forma profesional.
+    El objetivo no es generar ganancias rápidas, sino construir rendimiento sostenible en el tiempo.
+    </p>
+</div>
+
+</div>
+
+<!-- BOTÓN VOLVER ABAJO -->
 <div class="back">
 <a href="/GetFundedX/">⬅ Volver al inicio</a>
 </div>
+
+<script>
+/* LÓGICA DEL ACORDEÓN INFORMATIVO */
+document.addEventListener("DOMContentLoaded", () => {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener("click", () => {
+            const accordionItem = header.parentElement;
+            const isActive = accordionItem.classList.contains("active");
+
+            // Cerrar todos los items abiertos
+            document.querySelectorAll(".accordion-item").forEach(item => {
+                item.classList.remove("active");
+            });
+
+            // Si el item clickeado no estaba activo, abrirlo
+            if (!isActive) {
+                accordionItem.classList.add("active");
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>
