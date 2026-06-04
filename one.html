@@ -23,19 +23,6 @@ background:radial-gradient(circle at top, #0B1B3A, #070B18);
 position:relative;
 }
 
-.back{
-position:absolute;
-left:20px;
-top:20px;
-background:#00D4FF;
-color:#000;
-padding:8px 14px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-font-size:13px;
-}
-
 h1{
 font-size:30px;
 color:#00D4FF;
@@ -78,12 +65,31 @@ box-shadow:0 0 10px #00D4FF33;
 
 .plan-title{
 font-weight:bold;
+font-size: 22px;
+color: #ffffff;
+letter-spacing: 1px;
 }
 
 .plan-price{
 font-size:22px;
 color:#00D4FF;
 margin-top:10px;
+}
+
+/* ETIQUETA NEÓN */
+.badge-neon {
+display: inline-block;
+margin-top: 12px;
+padding: 4px 10px;
+font-size: 11px;
+font-weight: bold;
+color: #39FF14;
+background: rgba(57, 255, 20, 0.1);
+border: 1px solid #39FF14;
+border-radius: 6px;
+box-shadow: 0 0 8px rgba(57, 255, 20, 0.6), inset 0 0 4px rgba(57, 255, 20, 0.3);
+text-transform: uppercase;
+letter-spacing: 0.5px;
 }
 
 /* INFO */
@@ -192,51 +198,96 @@ transform:scale(1.02);
 width:20px;
 }
 
-/* ACORDEÓN */
+/* ACORDEÓN LLAMATIVO (Estilo instant.html) */
 
-.accordion{
-max-width:750px;
-margin:20px auto;
+.accordion {
+max-width: 750px;
+margin: 40px auto;
+padding: 0 20px;
+display: flex;
+flex-direction: column;
+gap: 15px;
 }
 
-.acc-item{
-background:#0C142B;
+.accordion-item {
+background: #0C142B;
+border: 1px solid #1E2A44;
+border-radius: 12px;
+overflow: hidden;
+transition: 0.3s;
+}
+
+.accordion-item:hover {
+border-color: #00D4FF;
+}
+
+.accordion-header {
+padding: 20px;
+font-size: 16px;
+font-weight: bold;
+color: #00D4FF;
+background: #0A1125;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+background: #101A35;
+}
+
+.accordion-header::after {
+content: '\002B';
+font-size: 24px;
+transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-header::after {
+content: '\2212';
+transform: rotate(180deg);
+}
+
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+padding: 0 25px;
+line-height: 1.7;
+transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.accordion-item.active .accordion-content {
+max-height: 600px;
+padding: 25px;
+}
+
+.highlight-box{
+background:linear-gradient(135deg,#0C142B,#101A35);
+border-left:3px solid #00D4FF;
+padding:15px;
+border-radius:8px;
+margin-bottom: 10px;
+}
+
+/* VOLVER */
+.back{
+text-align:center;
+margin:40px 0 60px 0;
+}
+
+.back a{
+color:white;
+text-decoration:none;
 border:1px solid #1E2A44;
+padding:10px 20px;
 border-radius:10px;
-margin-bottom:10px;
-overflow:hidden;
+transition:0.3s;
 }
 
-.acc-title{
-padding:16px;
-cursor:pointer;
-font-weight:bold;
-position:relative;
-}
-
-.acc-title::after{
-content:"+";
-position:absolute;
-right:20px;
-font-size:18px;
-}
-
-.acc-item.active .acc-title::after{
-content:"-";
-}
-
-.acc-content{
-max-height:0;
-overflow:hidden;
-transition:0.35s;
-padding:0 16px;
-opacity:0;
-}
-
-.acc-item.active .acc-content{
-max-height:400px;
-padding:15px 16px;
-opacity:0.85;
+.back a:hover{
+border-color:#00D4FF;
+color:#00D4FF;
 }
 
 </style>
@@ -246,15 +297,11 @@ opacity:0.85;
 <body>
 
 <header>
-
-<a href="index.html" class="back">← Volver</a>
-
-<h1>🏆 1 FASE → DIRECTO A FUNDED</h1>
+<h1>🚀 1 FASE → DIRECTO A FUNDED</h1>
 
 <div class="sub">
 Cumple 10% y accede a Funded + Desbloqueo exclusivo
 </div>
-
 </header>
 
 <!-- PLANES -->
@@ -269,6 +316,7 @@ Cumple 10% y accede a Funded + Desbloqueo exclusivo
 <div class="plan" onclick="selectPlan(1)">
 <div class="plan-title">3K Base</div>
 <div class="plan-price">$35</div>
+<span class="badge-neon">Más popular</span>
 </div>
 
 <div class="plan" onclick="selectPlan(2)">
@@ -287,13 +335,12 @@ Cumple 10% y accede a Funded + Desbloqueo exclusivo
 
 <div class="info" id="infoBox">
 
-<strong>🪙CONDICIONES</strong><br><br>
+<strong>🪙 CONDICIONES</strong><br><br>
 
-📉 EOD Trailing Drawdown: 5%<br>
+📉 Drawdown Estático: 5%<br>
 🎯 Objetivo: 10%<br>
 📅 Mínimo 5 días de trading<br><br>
 
-📊 Riesgo por trade: máx 2%<br>
 🛑 Stop Loss obligatorio<br>
 
 <!-- BOTÓN AZUL -->
@@ -324,11 +371,8 @@ Compra ahora
 </select>
 
 <button class="send-btn" onclick="enviarPedido()">
-
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 Enviar Pedido
-
 </button>
 
 </div>
@@ -339,27 +383,31 @@ Enviar Pedido
 
 <div class="accordion">
 
-<div class="acc-item">
-<div class="acc-title">⚡ Condiciones</div>
-<div class="acc-content">
+<div class="accordion-item">
+<div class="accordion-header">⚡ Condiciones</div>
+<div class="accordion-content">
+<div class="highlight-box">
 ✔ 1 Sola fase → Directo a Funded<br>
 ❌ Sin regla de consistencia<br>
 📅 Mínimo 5 días de trading
 </div>
 </div>
+</div>
 
-<div class="acc-item">
-<div class="acc-title">📉 Reglas de Trading</div>
-<div class="acc-content">
-📊 Riesgo máximo por trade: 2%<br>
+<div class="accordion-item">
+<div class="accordion-header">📉 Reglas de Trading</div>
+<div class="accordion-content">
+<div class="highlight-box">
 🛑 Stop Loss obligatorio<br>
 ❌ Sin Stop Loss → pérdida de la cuenta
 </div>
 </div>
+</div>
 
-<div class="acc-item">
-<div class="acc-title">🔥 Beneficio Exclusivo</div>
-<div class="acc-content">
+<div class="accordion-item">
+<div class="accordion-header">🔥 Beneficio Exclusivo</div>
+<div class="accordion-content">
+<div class="highlight-box">
 Al pasar tu cuenta, desbloqueas acceso a Directo a Funded Real.<br><br>
 
 ✔ Puedes volver a fondearte sin repetir procesos<br>
@@ -369,7 +417,13 @@ Al pasar tu cuenta, desbloqueas acceso a Directo a Funded Real.<br><br>
 💡 Te fondeas una vez… y aseguras tu regreso una vez más.
 </div>
 </div>
+</div>
 
+</div>
+
+<!-- VOLVER -->
+<div class="back">
+<a href="index.html">Volver al inicio</a>
 </div>
 
 <script>
@@ -382,22 +436,33 @@ plans.forEach(p => p.classList.remove("active"));
 plans[i].classList.add("active");
 }
 
-/* ACORDEÓN */
-
-const acc = document.querySelectorAll(".acc-item");
-
-acc.forEach(item=>{
-item.addEventListener("click", ()=>{
-acc.forEach(i=> i.classList.remove("active"));
-item.classList.toggle("active");
-});
-});
-
 /* TOGGLE FORM */
 
 function toggleForm(){
 document.getElementById("formBox").classList.toggle("active");
 }
+
+/* LÓGICA DEL ACORDEÓN */
+document.addEventListener("DOMContentLoaded", () => {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener("click", () => {
+            const accordionItem = header.parentElement;
+            const isActive = accordionItem.classList.contains("active");
+
+            // Cerrar todos los items abiertos
+            document.querySelectorAll(".accordion-item").forEach(item => {
+                item.classList.remove("active");
+            });
+
+            // Si el item clickeado no estaba activo, abrirlo
+            if (!isActive) {
+                accordionItem.classList.add("active");
+            }
+        });
+    });
+});
 
 /* WHATSAPP */
 
