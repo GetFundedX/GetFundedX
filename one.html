@@ -92,114 +92,229 @@ text-transform: uppercase;
 letter-spacing: 0.5px;
 }
 
-/* INFO */
-
-.info{
-max-width:750px;
-margin:20px auto;
-background:#0C142B;
-padding:25px;
-border-radius:14px;
-border:1px solid #1E2A44;
-line-height:1.6;
+/* POPUP MODAL INTEGRADO */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(4, 7, 16, 0.8);
+backdrop-filter: blur(4px);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+z-index: 1000;
 }
 
-.info strong{
-color:#00D4FF;
+.modal-overlay.active {
+opacity: 1;
+pointer-events: auto;
 }
 
-/* BOTÓN AZUL PRINCIPAL */
+.modal-content {
+background: #0C142B;
+border: 2px solid #1E2A44;
+border-radius: 16px;
+padding: 25px;
+width: 90%;
+max-width: 400px;
+text-align: center;
+box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
+transform: translateY(-20px);
+transition: transform 0.3s ease;
+max-height: 90vh;
+overflow-y: auto;
+}
 
+/* Scrollbar sutil para el modal si se expande el formulario en pantallas chicas */
+.modal-content::-webkit-scrollbar {
+width: 6px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+background: #1E2A44;
+border-radius: 4px;
+}
+
+.modal-overlay.active .modal-content {
+transform: translateY(0);
+}
+
+.modal-plan-title {
+font-size: 24px;
+color: #00D4FF;
+font-weight: bold;
+margin-bottom: 20px;
+border-bottom: 1px solid #1E2A44;
+padding-bottom: 10px;
+}
+
+.modal-metrics-container {
+transition: max-height 0.3s ease, opacity 0.2s ease;
+max-height: 500px;
+opacity: 1;
+overflow: hidden;
+}
+
+.modal-metrics-container.hide {
+max-height: 0;
+opacity: 0;
+margin-bottom: 0;
+}
+
+.modal-metric {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: #0A1125;
+padding: 12px 16px;
+border-radius: 10px;
+margin-bottom: 12px;
+border: 1px solid #1E2A44;
+}
+
+.modal-metric-label {
+display: flex;
+align-items: center;
+gap: 10px;
+font-weight: bold;
+font-size: 14px;
+color: #e0e0e0;
+}
+
+.modal-metric-value {
+font-size: 16px;
+font-weight: bold;
+color: #ffffff;
+}
+
+.modal-metric-value.objective {
+color: #39FF14;
+text-shadow: 0 0 5px rgba(57, 255, 20, 0.2);
+}
+
+.modal-metric-value.drawdown {
+color: #ff4d4d;
+text-shadow: 0 0 5px rgba(255, 77, 77, 0.2);
+}
+
+.modal-metric-value.highlight {
+color: #00D4FF;
+}
+
+/* BOTÓN COMPRA DENTRO DEL POPUP */
 .buy-btn{
-margin-top:20px;
-display:block;
-width:100%;
-background:#00D4FF;
-color:black;
-padding:14px;
-border-radius:10px;
-font-weight:bold;
-text-align:center;
-border:none;
-cursor:pointer;
-transition:0.25s;
-font-size:15px;
+margin-top: 10px;
+display: block;
+width: 100%;
+background: #00D4FF;
+color: black;
+padding: 14px;
+border-radius: 10px;
+font-weight: bold;
+text-align: center;
+border: none;
+cursor: pointer;
+transition: 0.25s;
+font-size: 15px;
+box-sizing: border-box;
 }
 
 .buy-btn:hover{
-transform:scale(1.02);
-box-shadow:0 0 15px #00D4FF33;
+transform: scale(1.02);
+box-shadow: 0 0 15px #00D4FF55;
 }
 
-/* FORMULARIO ACORDEÓN */
+.buy-btn.hide {
+display: none;
+}
 
+.modal-close-btn {
+margin-top: 12px;
+background: #1E2A44;
+color: white;
+border: none;
+padding: 12px 20px;
+border-radius: 8px;
+cursor: pointer;
+font-weight: bold;
+width: 100%;
+font-size: 15px;
+transition: 0.2s;
+}
+
+.modal-close-btn:hover {
+background: #ff4d4d;
+color: white;
+}
+
+/* FORMULARIO ACORDEÓN ADAPTADO AL MODAL */
 .formBox{
-max-height:0;
-overflow:hidden;
-opacity:0;
-transform:translateY(-10px);
-
-transition:0.35s ease;
-
-display:flex;
-flex-direction:column;
-gap:12px;
-
-margin-top:0;
+max-height: 0;
+overflow: hidden;
+opacity: 0;
+transform: translateY(-10px);
+transition: 0.35s ease;
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 0;
+box-sizing: border-box;
 }
 
 .formBox.active{
-max-height:500px;
-opacity:1;
-transform:translateY(0);
-margin-top:20px;
+max-height: 500px;
+opacity: 1;
+transform: translateY(0);
+margin-top: 10px;
+margin-bottom: 10px;
 }
 
 .formBox input,
 .formBox select{
-padding:12px;
-border-radius:10px;
-border:1px solid #1E2A44;
-background:#081120;
-color:white;
-outline:none;
+padding: 12px;
+border-radius: 10px;
+border: 1px solid #1E2A44;
+background: #081120;
+color: white;
+outline: none;
+font-size: 14px;
 }
 
 .formBox input:focus,
 .formBox select:focus{
-border-color:#00D4FF;
+border-color: #00D4FF;
 }
 
 /* BOTÓN WHATSAPP */
-
 .send-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-
-background:#25D366;
-color:white;
-
-border:none;
-padding:12px;
-border-radius:10px;
-
-cursor:pointer;
-font-weight:bold;
-transition:0.2s;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+background: #25D366;
+color: white;
+border: none;
+padding: 14px;
+border-radius: 10px;
+cursor: pointer;
+font-weight: bold;
+transition: 0.2s;
+font-size: 15px;
 }
 
 .send-btn:hover{
-transform:scale(1.02);
+transform: scale(1.02);
 }
 
 .send-btn img{
-width:20px;
+width: 20px;
 }
 
-/* ACORDEÓN LLAMATIVO (Estilo instant.html) */
-
+/* ACORDEÓN LLAMATIVO */
 .accordion {
 max-width: 750px;
 margin: 40px auto;
@@ -263,31 +378,31 @@ padding: 25px;
 }
 
 .highlight-box{
-background:linear-gradient(135deg,#0C142B,#101A35);
-border-left:3px solid #00D4FF;
-padding:15px;
-border-radius:8px;
+background: linear-gradient(135deg,#0C142B,#101A35);
+border-left: 3px solid #00D4FF;
+padding: 15px;
+border-radius: 8px;
 margin-bottom: 10px;
 }
 
 /* VOLVER */
 .back{
-text-align:center;
-margin:40px 0 60px 0;
+text-align: center;
+margin: 40px 0 60px 0;
 }
 
 .back a{
-color:white;
-text-decoration:none;
-border:1px solid #1E2A44;
-padding:10px 20px;
-border-radius:10px;
-transition:0.3s;
+color: white;
+text-decoration: none;
+border: 1px solid #1E2A44;
+padding: 10px 20px;
+border-radius: 10px;
+transition: 0.3s;
 }
 
 .back a:hover{
-border-color:#00D4FF;
-color:#00D4FF;
+border-color: #00D4FF;
+color: #00D4FF;
 }
 
 </style>
@@ -331,36 +446,41 @@ Cumple 10% y accede a Funded + Desbloqueo exclusivo
 
 </div>
 
-<!-- INFO -->
+<!-- VENTANA POPUP MODAL INTEGRADO CON COMPRA -->
+<div class="modal-overlay" id="planModal">
+<div class="modal-content">
+<div class="modal-plan-title" id="modalTitle">Cuenta</div>
 
-<div class="info" id="infoBox">
+<!-- Contenedor de métricas (se oculta al abrir el formulario para ahorrar espacio) -->
+<div id="modalMetricsContainer" class="modal-metrics-container">
+<div class="modal-metric">
+<div class="modal-metric-label">🎯 Objetivo (10%)</div>
+<div class="modal-metric-value objective" id="modalObjective">$0</div>
+</div>
 
-<strong>🪙 CONDICIONES</strong><br><br>
+<div class="modal-metric">
+<div class="modal-metric-label">📉 Pérdida Máx (5%)</div>
+<div class="modal-metric-value drawdown" id="modalDrawdown">$0</div>
+</div>
 
-📉 Drawdown Estático: 5%<br>
-🎯 Objetivo: 10%<br>
-📅 Mínimo 5 días de trading<br><br>
+<div class="modal-metric">
+<div class="modal-metric-label">🔓 Regla de Consistencia</div>
+<div class="modal-metric-value highlight">Sin Regla</div>
+</div>
 
-🛑 Stop Loss obligatorio<br>
+<div class="modal-metric">
+<div class="modal-metric-label">📅 Días de Trading</div>
+<div class="modal-metric-value highlight">Mínimo 5</div>
+</div>
+</div>
 
-<!-- BOTÓN AZUL -->
-
-<button class="buy-btn" onclick="toggleForm()">
+<!-- BOTÓN DE COMPRA PRINCIPAL -->
+<button class="buy-btn" id="modalBuyBtn" onclick="openFormInModal()">
 Compra ahora
 </button>
 
-<!-- FORMULARIO -->
-
+<!-- FORMULARIO INTEGRADO -->
 <div class="formBox" id="formBox">
-
-<select id="planSelect">
-<option value="">Selecciona la cuenta</option>
-<option value="2K Core">2K Core</option>
-<option value="3K Base">3K Base</option>
-<option value="5K Premium">5K Premium</option>
-<option value="10K Elite">10K Elite</option>
-</select>
-
 <input type="text" id="nombre" placeholder="Nombre">
 <input type="text" id="telefono" placeholder="Número">
 
@@ -374,9 +494,11 @@ Compra ahora
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 Enviar Pedido
 </button>
-
 </div>
 
+<!-- BOTÓN DE ACCIÓN / CIERRE -->
+<button class="modal-close-btn" id="modalCloseBtn" onclick="closeModal()">Cerrar</button>
+</div>
 </div>
 
 <!-- ACORDEON -->
@@ -410,7 +532,7 @@ Enviar Pedido
 <div class="highlight-box">
 Al pasar tu cuenta, desbloqueas acceso a Directo a Funded Real.<br><br>
 
-✔ Puedes volver a fondearte sin repetir procesos<br>
+✔ Puedes volver a fondearse sin repetir procesos<br>
 ✔ Tienes respaldo real<br>
 ✔ No empiezas desde cero<br><br>
 
@@ -428,19 +550,72 @@ Al pasar tu cuenta, desbloqueas acceso a Directo a Funded Real.<br><br>
 
 <script>
 
+// Guardamos el plan seleccionado actualmente para procesar el mensaje final
+let selectedPlanName = "";
+
+const planMetrics = [
+  { title: "Plan 2K Core", objective: "$200", drawdown: "$100", valueSelect: "2K Core" },
+  { title: "Plan 3K Base", objective: "$300", drawdown: "$150", valueSelect: "3K Base" },
+  { title: "Plan 5K Premium", objective: "$500", drawdown: "$250", valueSelect: "5K Premium" },
+  { title: "Plan 10K Elite", objective: "$1,000", drawdown: "$500", valueSelect: "10K Elite" }
+];
+
 const plans = document.querySelectorAll(".plan");
-const info = document.getElementById("infoBox");
 
 function selectPlan(i){
 plans.forEach(p => p.classList.remove("active"));
 plans[i].classList.add("active");
+
+selectedPlanName = planMetrics[i].valueSelect;
+
+// Resetear el estado interno del modal por si el usuario lo cerró con el formulario abierto
+document.getElementById("modalMetricsContainer").classList.remove("hide");
+document.getElementById("modalBuyBtn").classList.remove("hide");
+document.getElementById("formBox").classList.remove("active");
+document.getElementById("modalCloseBtn").innerText = "Cerrar";
+
+// Inyectar la información correspondiente
+document.getElementById("modalTitle").innerText = planMetrics[i].title;
+document.getElementById("modalObjective").innerText = planMetrics[i].objective;
+document.getElementById("modalDrawdown").innerText = planMetrics[i].drawdown;
+
+// Mostrar modal
+document.getElementById("planModal").classList.add("active");
 }
 
-/* TOGGLE FORM */
+function openFormInModal() {
+// Ocultamos métricas y el botón inicial de compra para dejar espacio al formulario limpio
+document.getElementById("modalMetricsContainer").classList.add("hide");
+document.getElementById("modalBuyBtn").classList.add("hide");
 
-function toggleForm(){
-document.getElementById("formBox").classList.toggle("active");
+// Desplegamos el bloque del formulario
+document.getElementById("formBox").classList.add("active");
+
+// Cambiamos la función del botón inferior para poder "Volver Atrás" si cambian de opinión
+document.getElementById("modalCloseBtn").innerText = "Volver atrás";
 }
+
+function closeModal() {
+const closeBtn = document.getElementById("modalCloseBtn");
+// Si el botón dice "Volver atrás", regresa a la pantalla de métricas sin cerrar el modal por completo
+if (closeBtn.innerText === "Volver atrás") {
+    document.getElementById("modalMetricsContainer").classList.remove("hide");
+    document.getElementById("modalBuyBtn").classList.remove("hide");
+    document.getElementById("formBox").classList.remove("active");
+    closeBtn.innerText = "Cerrar";
+} else {
+    // Si dice "Cerrar", quita el modal por completo
+    document.getElementById("planModal").classList.remove("active");
+}
+}
+
+// Cierre pasivo del popup al presionar fuera del cuadro modal central
+document.getElementById("planModal").addEventListener("click", function(e) {
+if(e.target === this) {
+    // Forzamos el cierre completo de la vista de forma segura
+    document.getElementById("planModal").classList.remove("active");
+}
+});
 
 /* LÓGICA DEL ACORDEÓN */
 document.addEventListener("DOMContentLoaded", () => {
@@ -451,12 +626,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const accordionItem = header.parentElement;
             const isActive = accordionItem.classList.contains("active");
 
-            // Cerrar todos los items abiertos
             document.querySelectorAll(".accordion-item").forEach(item => {
                 item.classList.remove("active");
             });
 
-            // Si el item clickeado no estaba activo, abrirlo
             if (!isActive) {
                 accordionItem.classList.add("active");
             }
@@ -468,12 +641,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function enviarPedido(){
 
-let plan = document.getElementById("planSelect").value;
 let nombre = document.getElementById("nombre").value;
 let telefono = document.getElementById("telefono").value;
 let pago = document.getElementById("pago").value;
 
-if(!plan || !nombre || !telefono || !pago){
+if(!nombre || !telefono || !pago){
 alert("Completa todos los campos");
 return;
 }
@@ -481,7 +653,7 @@ return;
 let mensaje =
 `🟢 FUNDX ORDER
 
-📦 Cuenta: ${plan}
+📦 Cuenta: ${selectedPlanName}
 👤 Nombre: ${nombre}
 📱 Número: ${telefono}
 💳 Método: ${pago}
