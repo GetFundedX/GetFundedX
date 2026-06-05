@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torneo de Trading - FundedX</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
     <style>
         /* Estilos Globales - Dark Mode Premium */
         * {
@@ -30,7 +27,7 @@
         /* Encabezado */
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             padding: 20px 0;
             border-bottom: 1px solid #1e2330;
         }
@@ -45,64 +42,6 @@
             color: #848e9c;
             font-size: 1.1rem;
         }
-
-        /* --- ESTILOS DEL BANNER DE CELEBRACIÓN --- */
-        .celebration-banner {
-            text-align: center;
-            background: linear-gradient(135deg, #1e1b10 0%, #161a22 100%);
-            border: 2px solid #f0b90b;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(240, 185, 11, 0.4);
-            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        .title-glow {
-            font-size: 2.5rem;
-            color: #ffffff;
-            text-shadow: 0 0 10px #f0b90b, 0 0 20px #f0b90b;
-            margin-bottom: 15px;
-            font-style: italic;
-            text-transform: uppercase;
-        }
-        .winner-highlight {
-            font-size: 2rem;
-            color: #f0b90b;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #848e9c;
-            font-size: 1rem;
-            font-style: italic;
-        }
-
-        /* Animación de entrada del banner */
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Pegatinas (emojis flotantes) */
-        .sticker {
-            position: absolute;
-            font-size: 3rem;
-            animation: float 3s ease-in-out infinite;
-            z-index: 10;
-        }
-        .sticker-1 { top: 20px; left: 5%; animation-delay: 0s; }
-        .sticker-2 { bottom: 20px; right: 8%; animation-delay: 1s; font-size: 4rem;}
-        .sticker-3 { top: 30px; right: 15%; animation-delay: 0.5s; font-size: 3.5rem;}
-        .sticker-4 { bottom: 30px; left: 12%; animation-delay: 1.5s; font-size: 3rem;}
-        
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-15px) rotate(15deg) scale(1.1); }
-            100% { transform: translateY(0px) rotate(0deg) scale(1); }
-        }
-        /* ----------------------------------------- */
 
         /* PODIO DINÁMICO (Top 3) */
         .podium-container {
@@ -124,12 +63,12 @@
             transition: transform 0.3s ease;
             position: relative;
         }
+        /* Alturas escalonadas para efecto de podio */
         .podium-card.pos-1 { 
             order: 2; 
             height: 260px; 
             border: 2px solid #f0b90b; 
             background: linear-gradient(180deg, #1e1b10 0%, #161a22 100%);
-            box-shadow: 0 0 20px rgba(240, 185, 11, 0.2);
         }
         .podium-card.pos-2 { order: 1; height: 220px; }
         .podium-card.pos-3 { order: 3; height: 190px; }
@@ -171,7 +110,7 @@
             padding-top: 8px;
         }
 
-        /* TABLA DE CLASIFICACIÓN GENERAL */
+        /* TABLA DE CLASIFICACIÓN GENERAL (Puestos 4 al 30) */
         .leaderboard-section {
             background: #161a22;
             border: 1px solid #2b3139;
@@ -212,17 +151,33 @@
         .col-name { width: 60%; font-weight: 600; }
         .col-performance { width: 30%; text-align: right; font-weight: bold; }
 
-        /* Estados */
-        .loading-status { text-align: center; padding: 40px; color: #848e9c; font-size: 1.1rem; }
-        .error-status { color: #f84f62; text-align: center; padding: 20px; }
+        /* Estados de carga y error */
+        .loading-status {
+            text-align: center;
+            padding: 40px;
+            color: #848e9c;
+            font-size: 1.1rem;
+        }
+        .error-status {
+            color: #f84f62;
+            text-align: center;
+            padding: 20px;
+        }
 
+        /* Responsividad para pantallas pequeñas */
         @media (max-width: 650px) {
-            .podium-container { flex-direction: column; align-items: center; gap: 20px; }
-            .podium-card { width: 100%; height: auto !important; }
-            .podium-card.pos-1, .podium-card.pos-2, .podium-card.pos-3 { order: initial; }
-            .title-glow { font-size: 1.8rem; }
-            .winner-highlight { font-size: 1.5rem; }
-            .sticker { display: none; /* Ocultar pegatinas en móviles pequeños para evitar que tapen el texto */ }
+            .podium-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .podium-card {
+                width: 100%;
+                height: auto !important;
+            }
+            .podium-card.pos-1, .podium-card.pos-2, .podium-card.pos-3 {
+                order: initial;
+            }
         }
     </style>
 </head>
@@ -234,17 +189,6 @@
             <h1>🏆 TORNEO 🏆</h1>
             <p>Clasificación Oficial en 🟢 Vivo — Actualizado Automáticamente en cada Sesión , 👨‍💻</p>
         </header>
-
-        <div id="celebration-banner" class="celebration-banner" style="display: none;">
-            <div class="sticker sticker-1">🤩</div>
-            <div class="sticker sticker-2">👏</div>
-            <div class="sticker sticker-3">🎉</div>
-            <div class="sticker sticker-4">🔥</div>
-
-            <h2 class="title-glow">¡FELICIDADES A NUESTROS CAMPEONES!</h2>
-            <p class="winner-highlight">🏆 Campeón: <span id="champion-name"></span> 🏆</p>
-            <p class="subtitle">*Esta vista especial estará disponible hasta el lunes*</p>
-        </div>
 
         <div class="podium-container" id="podium-box">
             </div>
@@ -271,17 +215,20 @@
     </div>
 
     <script>
+        // =================================================================
+        // CONFIGURACIÓN: REEMPLAZA ESTO CON EL ID DE TU GOOGLE SHEETS
+        // =================================================================
         const SPREADSHEET_ID = '1d_5zXLbrKg8GllpuY8j05JoEJkOwqWie4YS9m6wq6Q8'; 
+
+        // Enlace automático para extraer los datos limpios
         const jsonUrl = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json`;
 
+        // Premios fijos configurados para FundedX
         const prizeDetails = {
             1: "Cuenta $100 + Retiros Diarios + 25% de Descuento de por vida",
             2: "Cuenta $100 (Drowdown 60%) + Retiros Diarios",
             3: "Descuento de 50% en nuestras evaluaciones, incluído el programa de 100$ Instant Funded Real. (Con retiros diarios)"
         };
-
-        // FECHA LÍMITE: Martes 9 de junio de 2026 a las 00:00 (Es decir, termina al acabar el lunes 8)
-        const limitDate = new Date('2026-06-09T00:00:00'); 
 
         async function loadLeaderboard() {
             const statusMsg = document.getElementById('status-message');
@@ -298,12 +245,14 @@
                 const response = await fetch(jsonUrl);
                 const text = await response.text();
 
+                // Limpiar la envoltura de Google para obtener JSON puro
                 const jsonText = text.substring(47).slice(0, -2);
                 const data = JSON.parse(jsonText);
 
                 const rows = data.table.rows;
                 let traders = [];
 
+                // Mapear filas (Columna A = Nombre, Columna B = Rendimiento en dólares)
                 rows.forEach(r => {
                     const name = r.c[0] ? r.c[0].v : null;
                     const performance = r.c[1] ? parseFloat(r.c[1].v) : 0;
@@ -313,6 +262,7 @@
                     }
                 });
 
+                // ORDENAR AUTOMÁTICAMENTE DE MAYOR A MENOR RENDIMIENTO
                 traders.sort((a, b) => b.performance - a.performance);
 
                 if (traders.length === 0) {
@@ -323,7 +273,7 @@
                 statusMsg.style.display = 'none';
                 tableBox.style.display = 'block';
 
-                // --- RENDERIZAR PODIO ---
+                // --- RENDERIZAR PODIO (TOP 3) ---
                 let podiumHtml = '';
                 for (let i = 0; i < 3; i++) {
                     if (traders[i]) {
@@ -331,6 +281,7 @@
                         const isNegative = traders[i].performance < 0;
                         const sign = traders[i].performance > 0 ? '+' : '';
 
+                        // Formatear visualmente el valor con el signo de pesos/dólares
                         const absoluteValue = Math.abs(traders[i].performance).toFixed(2);
                         const displayValue = isNegative ? `-$${absoluteValue}` : `${sign}$${absoluteValue}`;
 
@@ -346,39 +297,7 @@
                 }
                 podiumBox.innerHTML = podiumHtml;
 
-                // --- LÓGICA DE CELEBRACIÓN (HASTA EL LUNES) ---
-                const now = new Date();
-                if (now < limitDate && traders.length > 0) {
-                    const banner = document.getElementById('celebration-banner');
-                    const championNameSpan = document.getElementById('champion-name');
-                    
-                    // Colocar el nombre del primer lugar automáticamente
-                    championNameSpan.innerText = traders[0].name;
-                    banner.style.display = 'block'; // Mostrar el cartel
-
-                    // Efecto de Confeti (dispara ráfagas desde los bordes)
-                    let duration = 6 * 1000; // Dura 6 segundos
-                    let animationEnd = Date.now() + duration;
-                    let defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-                    function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-
-                    let interval = setInterval(function() {
-                        let timeLeft = animationEnd - Date.now();
-
-                        if (timeLeft <= 0) {
-                            return clearInterval(interval);
-                        }
-
-                        let particleCount = 50 * (timeLeft / duration);
-                        // Disparar desde la izquierda
-                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                        // Disparar desde la derecha
-                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-                    }, 250);
-                }
-
-                // --- RENDERIZAR TABLA GENERAL ---
+                // --- RENDERIZAR TABLA GENERAL (PUESTOS 4 EN ADELANTE) ---
                 let tableRowsHtml = '';
                 for (let i = 0; i < traders.length; i++) {
                     if (i >= 3) {
