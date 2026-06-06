@@ -517,6 +517,120 @@
         </div>
     </header>
 
+<section class="retiros-section">
+    <div class="retiros-header">
+        <h3 class="retiros-subtitle">RETIROS PROCESADOS</h3>
+        <div class="retiros-amount">$00.00</div>
+        <p class="retiros-info">Al alcanzar $100 se lanza un 🎁 SORTEO | Al alcanzar $200 se lanza un 🏆 TORNEO</p>
+    </div>
+
+    <div class="timeline-wrapper">
+        <div class="progress-track">
+            <div class="progress-bar-fill glow-animation" style="width: 65%;"></div>
+        </div>
+        
+        <div class="marker marker-center">
+            <div class="triangle"></div>
+            <span class="label">SORTEO ($100)</span>
+            <span class="icon">🎁</span>
+        </div>
+
+        <div class="marker marker-end">
+            <div class="triangle"></div>
+            <span class="label">TORNEO ($200)</span>
+            <span class="icon">🏆</span>
+        </div>
+    </div>
+</section>
+
+<style>
+    .retiros-section {
+        padding: 60px 20px; /* Margen para despegar de los botones */
+        text-align: center;
+        color: #fff;
+    }
+
+    .retiros-subtitle {
+        letter-spacing: 4px;
+        color: #d4af37; /* Dorado */
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .retiros-amount {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: #d4af37;
+        text-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+    }
+
+    .retiros-info {
+        font-size: 0.9rem;
+        color: #b0b0b0;
+        margin-bottom: 50px;
+    }
+
+    .timeline-wrapper {
+        position: relative;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .progress-track {
+        height: 12px;
+        background: #1a1a1a;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #333;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        /* Degradado Dorado */
+        background: linear-gradient(90deg, #b8860b, #ffd700, #b8860b);
+        background-size: 200% 100%;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        border-radius: 10px;
+    }
+
+    /* Animación de iluminación constante */
+    .glow-animation {
+        animation: loading-glow 3s infinite linear;
+    }
+
+    @keyframes loading-glow {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    .marker {
+        position: absolute;
+        top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #d4af37;
+    }
+
+    .marker-center { left: 50%; transform: translateX(-50%); }
+    .marker-end { left: 90%; transform: translateX(-90%); }
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 10px solid #d4af37;
+        filter: drop-shadow(0 0 8px #d4af37);
+    }
+
+    .label { font-size: 0.7rem; margin-top: 5px; font-weight: bold; }
+    .icon { font-size: 1rem; margin-top: 2px; }
+</style>
+
+
     <a class="cta-secondary" href="reglas.html"> VER REGLAS</a>
 
     <!-- MISIÓN -->
@@ -820,6 +934,36 @@
             }
         }
     </script>
+
+<script>
+    async function actualizarRetiros() {
+        // Sustituye este link por el link CSV que te dio Google Sheets
+        const url = "1Z38YXmwxVgMkb093grkztsC0WdoW-n1Obhpt1YN8gMk"; 
+        
+        try {
+            const response = await fetch(url);
+            const data = await response.text();
+            
+            // Suponiendo que el valor está en la primera celda (A1)
+            const valorTotal = parseFloat(data.trim()); 
+            
+            // Actualizar el número en pantalla
+            document.querySelector('.retiros-amount').innerText = '$' + valorTotal.toFixed(2);
+            
+            // Actualizar la barra (Asumimos una meta lógica, ej: $300 para el 100%)
+            const metaMax = 300; 
+            const porcentaje = (valorTotal / metaMax) * 100;
+            document.querySelector('.progress-bar-fill').style.width = Math.min(porcentaje, 100) + '%';
+            
+        } catch (error) {
+            console.error("Error al leer el Sheets:", error);
+        }
+    }
+
+    // Ejecutar al cargar la página
+    actualizarRetiros();
+</script>
+
 
 </body>
 </html>
