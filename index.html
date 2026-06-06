@@ -83,7 +83,7 @@
         background:
             linear-gradient(rgba(10, 14, 23, 0.85), rgba(10, 14, 23, 0.95)),
             url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
-        
+
         /* Hace que el fondo no se mueva (Efecto Parallax) */
         background-attachment: fixed;
     }
@@ -137,7 +137,7 @@
         text-decoration:none;
         transition: transform 0.3s ease;
     }
-    
+
     .cta:hover {
         transform: translateY(-3px);
     }
@@ -406,7 +406,7 @@
         background:#00D4FF;
         color:#000;
     }
-    
+
     .hero-box{
         background: rgba(12, 20, 43, 0.75);
         backdrop-filter: blur(10px);
@@ -510,13 +510,126 @@
             </div>
 
             <div class="slogan">
-                
+
             </div>
 
             <a class="cta" href="#programas">Explorar Programas</a>
         </div>
     </header>
 
+
+<section class="retiros-section">
+    <div class="retiros-header">
+        <h3 class="retiros-subtitle">RETIROS PROCESADOS</h3>
+        <div class="retiros-amount">$130.00</div>
+        <p class="retiros-info">Al alcanzar $100 se lanza un 🎁SORTEO | Al alcanzar $200 se lanza un 🏆TORNEO</p>
+    </div>
+
+    <div class="timeline-wrapper">
+        <div class="progress-track">
+            <div class="progress-bar-fill" style="width: 65%;"></div>
+        </div>
+        
+        <!-- Nodo 1: Sorteo (Centro) -->
+        <div class="marker marker-center">
+            <div class="triangle"></div>
+            <span class="label">SORTEO ($100)</span>
+            <span class="icon">🎁</span>
+        </div>
+
+        <!-- Nodo 2: Torneo (Casi al final) -->
+        <div class="marker marker-end">
+            <div class="triangle"></div>
+            <span class="label">TORNEO ($200)</span>
+            <span class="icon">🏆</span>
+        </div>
+    </div>
+</section>
+
+<style>
+    .retiros-section {
+        padding: 40px 20px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .retiros-subtitle {
+        letter-spacing: 3px;
+        color: #00d4ff; /* Azul neÃ³n */
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .retiros-amount {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: #00d4ff;
+        text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    }
+
+    .retiros-info {
+        font-size: 0.85rem;
+        color: #aaa;
+        margin-bottom: 40px;
+    }
+
+    .timeline-wrapper {
+        position: relative;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .progress-track {
+        height: 12px;
+        background: #1a1a1a;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #333;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #0077ff, #00d4ff);
+        box-shadow: 0 0 15px #00d4ff;
+        border-radius: 10px;
+        transition: width 1.5s ease-in-out;
+    }
+
+    .marker {
+        position: absolute;
+        top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+    }
+
+    .marker-center { left: 50%; transform: translateX(-50%); }
+    .marker-end { left: 90%; transform: translateX(-90%); }
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 10px solid #00d4ff;
+        filter: drop-shadow(0 0 5px #00d4ff);
+    }
+
+    .label {
+        font-size: 0.7rem;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+    
+    .icon { font-size: 1rem; margin-top: 2px; }
+</style>
+
+    </div>    </div>
+    
     <a class="cta-secondary" href="reglas.html"> VER REGLAS</a>
 
     <!-- MISIÓN -->
@@ -706,120 +819,4 @@
                 <div class="faq-answer">Los retiros se realizan utilizando el mismo método de pago utilizado al adquirir la cuenta. Actualmente, puedes retirar mediante USDT o transferencia bancaria en CUP, depende de que elija se le paga en la moneda que desee.</div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">❓ Qué métodos de pago aceptan</div>
-                <div class="faq-answer">Aceptamos pagos en USD (cripto USDT) y transferencias bancarias en CUP, facilitando el acceso a traders en diferentes entornos.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">❓ Cuál es el objetivo de los programas</div>
-                <div class="faq-answer">El objetivo es identificar traders consistentes y disciplinados, capaces de gestionar riesgo y generar resultados sostenibles en el tiempo.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">❓ Puedo retirar con operaciones abiertas</div>
-                <div class="faq-answer">No. Para procesar un retiro, todas las operaciones deben estar cerradas, garantizando así una gestión clara del balance.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">❓ Después de evaluación</div>
-                <div class="faq-answer">Una vez cumplas los objetivos del programa, accedes a una cuenta fondeada donde podrás operar con capital y generar ganancias bajo las condiciones establecidas.</div>
-            </div>
-        </div>
-
-        <div class="ver-mas">
-            <button onclick="toggleFaq()">Ver más</button>
-        </div>
-    </div>
-
-    <!-- 🔥 SOBRE NOSOTROS -->
-    <div class="section-title">SOBRE NOSOTROS</div>
-
-    <div class="objetivo" style="font-size:15px; text-align:left; line-height:1.8;">
-        En FundedX creemos en el desarrollo de traders reales, consistentes y disciplinados.  
-        Nuestro objetivo es construir una comunidad profesional donde el talento en los mercados pueda crecer con acceso a capital, estructura y reglas claras.
-        <br><br>
-        No buscamos traders perfectos, buscamos traders comprometidos con la mejora continua, la gestión del riesgo y la evolución a largo plazo dentro de un entorno serio y sostenible.
-        <br><br>
-        Nuestra visión es crear un espacio donde el trading deje de ser improvisación y se convierta en una carrera estructurada con oportunidades reales de crecimiento.
-    </div>
-
-    <!-- 🔥 REDES SOCIALES -->
-    <div class="section-title">REDES SOCIALES</div>
-
-    <div class="objetivo social-wrapper">
-        <div class="social-footer">
-            <div class="social-item">
-                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
-                <span><a href="https://www.instagram.com/getfundedx?igsh=MXR1eGpodHJ6MjFzdw==" style="color:white; text-decoration:none;">Instagram</a></span>
-            </div>
-
-            <div class="social-item">
-                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg">
-                <span><a href="https://youtube.com/@getfundedx?si=Fmn--96jeBGGE1Cf" style="color:white; text-decoration:none;">YouTube</a></span>
-            </div>
-
-            <div class="social-item">
-                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg">
-                <span><a href="https://www.facebook.com/profile.php?id=61589404766808" style="color:white; text-decoration:none;">Facebook</a></span>
-            </div>
-
-            <div class="social-item">
-                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg">
-                <span><a href="https://whatsapp.com/channel/0029Vb7fb6a8aKvQn1LAvd2O" style="color:white; text-decoration:none;">WhatsApp</a></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 🔥 FOOTER FINAL -->
-    <div class="footer">
-        <div class="footer-contact">
-            📧 Email: <a href="mailto:getfundedx@gmail.com">getfundedx@gmail.com</a><br>
-            📞 Teléfono: <a href="https://wa.me/+5356789325">+53 56789325</a>
-        </div>
-
-        <div class="footer-links">
-            <a href="terminos.html">Términos y Condiciones</a>
-            <a href="riesgo.html">Riesgo</a>
-        </div>
-
-        <div class="copyright">
-            © 2026 FundedX. Todos los derechos reservados.
-        </div>
-    </div>
-
-    <a href="https://wa.me/5356789325?text=Hola!%20Estoy%20interesado%20en%20adquirir%20un%20plan%20de%20fondeo%20en%20FundedX" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
-    </a>
-
-    <!-- SCRIPT CORREGIDO (Ubicado correctamente al final del body) -->
-    <script>
-        const faqItems = document.querySelectorAll(".faq-item");
-
-        faqItems.forEach(item => {
-            item.addEventListener("click", () => {
-                faqItems.forEach(i => {
-                    if(i !== item){
-                        i.classList.remove("active");
-                    }
-                });
-                item.classList.toggle("active");
-            });
-        });
-
-        function toggleFaq(){
-            const extra = document.querySelector(".faq-extra");
-            const btn = document.querySelector(".ver-mas button");
-
-            if(extra.style.display === "block"){
-                extra.style.display = "none";
-                btn.innerText = "Ver más";
-            }else{
-                extra.style.display = "block";
-                btn.innerText = "Ver menos";
-            }
-        }
-    </script>
-
-</body>
-</html>
+    
