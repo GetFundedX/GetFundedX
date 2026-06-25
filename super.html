@@ -540,26 +540,30 @@
         let isWaitlistMode = false;
 
         async function fetchSlots() {
-            try {
-                // Añadimos un parámetro de tiempo para evitar que el navegador guarde en caché datos viejos
-                const response = await fetch(SPREADSHEET_CSV_URL + "&t=" + new Date().getTime());
-                const data = await response.text();
-                
-                // Buscaremos cualquier número dentro de la hoja sin importar el texto que lo rodee
-                const matches = data.match(/\d+/); 
-                let foundSlots = 5; 
-
-                if (matches && matches.length > 0) {
-                    foundSlots = parseInt(matches[0]);
-                }
-                
+    try {
+        const response = await fetch(SPREADSHEET_CSV_URL + "&cb=" + new Date().getTime());
+        const data = await response.text();
+        
+        // El CSV divide las filas por salto de línea (\n)
+        const rows = data.split('\n');
+        
+        // Buscamos la segunda fila (índice 1, ya que empieza en 0)
+        if (rows.length >= 2) {
+            const secondRow = rows[1].split(','); // Divide la fila B por comas
+            const foundSlots = parseInt(secondRow[1]); // Captura la columna B (índice 1)
+            
+            if (!isNaN(foundSlots)) {
                 updateUI(foundSlots);
-
-            } catch (error) {
-                console.error("Error al obtener cupos desde Sheets:", error);
-                updateUI(5); 
+            } else {
+                console.log("No se pudo leer el número en B2, valor encontrado:", secondRow[1]);
+                updateUI(0);
             }
         }
+    } catch (error) {
+        console.error("Error de conexión:", error);
+        updateUI(0); 
+    }
+}
 
         function updateUI(slots) {
             const counterEl = document.getElementById('slots-counter');
