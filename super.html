@@ -15,7 +15,7 @@
             --border-color: #1e293b;
             --success-color: #2ed573;
             --warning-color: #ff9f43;
-            --neon-glow: 0 0 10px rgba(255, 71, 87, 0.7), 0 0 20px rgba(255, 71, 87, 0.5), 0 0 30px rgba(255, 71, 87, 0.3);
+            --neon-glow: 0 0 6px rgba(255, 71, 87, 0.35), 0 0 12px rgba(255, 71, 87, 0.22), 0 0 18px rgba(255, 71, 87, 0.12);
         }
 
         * {
@@ -61,7 +61,7 @@
             font-weight: 800;
             margin-bottom: 15px;
             color: #fff;
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--accent-color), 0 0 40px var(--accent-color), 0 0 50px var(--accent-color);
+            text-shadow: 0 0 4px rgba(255,255,255,.7), 0 0 10px rgba(255,71,87,.35), 0 0 18px rgba(255,71,87,.2);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -122,7 +122,6 @@
             to { background-position: 200% center; }
         }
 
-        /* NUEVO DISEÑO: Contenedor de Cupos simplificado */
         .slots-container {
             display: flex;
             align-items: center;
@@ -135,7 +134,6 @@
             letter-spacing: 1px;
         }
 
-        /* El cuadro con el número dinámico */
         .slots-box {
             background: rgba(255, 71, 87, 0.15);
             color: var(--accent-color);
@@ -265,13 +263,17 @@
         }
 
         .btn-waitlist {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            background: rgba(243,156,18,0.18);
+            border:1px solid rgba(243,156,18,0.35);
+            box-shadow:none;
+            padding: 12px 24px;
+            width:auto;
+            min-width:180px;
+            border-radius:14px;
+            backdrop-filter: blur(8px);
         }
         
-        .btn-waitlist:hover {
-            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
-        }
+        .btn-waitlist:hover {transform: translateY(-1px); background: rgba(243,156,18,0.25);} 
 
         /* Modal */
         .modal {
@@ -396,6 +398,18 @@
             color: var(--accent-color);
         }
 
+        
+        .account-summary {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+        .account-summary h3{font-size:1rem;margin-bottom:12px;color:var(--accent-color);}
+        .account-summary p{font-size:.9rem;color:var(--text-muted);margin:6px 0;}
+        .account-summary strong{color:var(--text-main);}
+
         @media (max-width: 768px) {
             .grid-layout, .grid-col {
                 display: block;
@@ -413,7 +427,6 @@
 <body>
 
     <div class="container">
-        
         <header>
             <span class="badge">🔥 Exclusivo</span>
             <h1 class="neon-title">Super Challenge</h1>
@@ -421,18 +434,25 @@
         </header>
 
         <div class="grid-layout">
-            
             <div class="grid-col">
                 <div class="card">
                     <div class="plan-header">
-                        <div class="plan-title">Evaluación Super Challenge</div>
+                        <div class="plan-title">Súper Challenge</div>
                         <div class="slots-container">
                             <span>Cupos</span>
-                            <div id="slots-counter" class="slots-box">5</div>
+                            <div id="slots-counter" class="slots-box">--</div>
                         </div>
                     </div>
                     
-                    <ul class="rules-list">
+                    
+                    <div class="account-summary">
+                        <h3>💰 Datos de la Cuenta</h3>
+                        <p><strong>Tamaño de la cuenta:</strong> <span style="color:#4da3ff;font-weight:700;">100 $</span></p>
+                        <p><strong>Objetivo de ganancias:</strong> <span style="color:#2ed573;font-weight:700;">50 $</span></p>
+                        <p>Al alcanzar el objetivo y cumplir con todas las reglas, se le otorga una <strong>Cuenta Real de $100</strong> con retiros diarios y un <strong>Profit Split 50/50</strong> escalable hasta <strong>80/20</strong>.</p>
+                    </div>
+                    
+<ul class="rules-list">
                         <li class="rule-item">
                             <span class="rule-label">🎯 Regla de Consistencia</span>
                             <span class="rule-value">Máx 40% / día</span>
@@ -469,30 +489,25 @@
             <div class="grid-col">
                 <div class="conditions-card">
                     <div class="section-title">🔒 Cláusulas de Exclusividad</div>
-                    
                     <div class="condition-block">
                         <h4>⏱️ Regla de Actividad Mínima</h4>
-                        <p>Para asegurar un flujo dinámico y comprometido, exigimos un periodo de actividad mínima de 7 días. Si la cuenta permanece totalmente inactiva durante una semana, se cerrará de forma automática para liberar la plaza a traders en lista de espera.</p>
+                        <p>Para asegurar un flujo dinámico y comprometido, exigimos un periodo de actividad mínima de 7 days. Si la cuenta permanece totalmente inactiva durante una semana, se cerrará de forma automática para liberar la plaza a traders en lista de espera.</p>
                     </div>
-
                     <div class="condition-block">
                         <h4>💼 Filosofía Híbrida (Fondo de Inversión)</h4>
                         <p>No somos una prop firm tradicional basada en la venta masiva de pruebas inactivas o fallidas. Nos enfocamos en un grupo selecto de traders rentables para integrarlos directamente a nuestro capital bajo un modelo colaborativo.</p>
                     </div>
-
                     <div class="condition-block">
                         <h4>📢 Actualización en Tiempo Real</h4>
                         <p>Los cupos se sincronizan automáticamente. Si el contador llega a cero, solo podrás acceder mediante la Lista de Espera, dándote prioridad para la siguiente liberación de cuentas inactivas o nuevas fases.</p>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="footer-nav">
             <a href="index.html">← Volver al inicio</a>
         </div>
-
     </div>
 
     <div id="buyModal" class="modal">
@@ -500,22 +515,18 @@
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2 class="modal-title" id="modalTitle">Pedido Súper Challenge</h2>
             <form id="checkoutForm" onsubmit="sendToWhatsApp(event)">
-                
                 <div class="form-group">
                     <label>1. Fee de Evaluación</label>
                     <input type="text" value="$5.00" readonly>
                 </div>
-
                 <div class="form-group">
                     <label>2. Nombre Completo</label>
                     <input type="text" id="clientName" placeholder="Ingresa tu nombre" required>
                 </div>
-
                 <div class="form-group">
                     <label>3. Correo Electrónico</label>
                     <input type="email" id="clientEmail" placeholder="Ingresa tu correo" required>
                 </div>
-
                 <div class="form-group">
                     <label>4. Método de Pago</label>
                     <select id="paymentMethod" required>
@@ -524,7 +535,6 @@
                         <option value="CUP">CUP (Transferencia)</option>
                     </select>
                 </div>
-
                 <button type="submit" class="ws-submit">
                     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                     Enviar Pedido
@@ -535,11 +545,12 @@
 
     <script>
         const WHATSAPP_NUMBER = "5356789325"; 
+        // Cambiamos a la URL de exportación limpia para evitar bloqueos por parámetros repetidos
         const SPREADSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1_QzUCw7b6BjVfhnpUlEI3Rd09AjW9P0cDyFoL01C0ZA/export?format=csv";
 
         let isWaitlistMode = false;
 
-        async function fetchSlots() {
+  async function fetchSlots() {
     try {
         const response = await fetch(SPREADSHEET_CSV_URL + "&cb=" + new Date().getTime());
         const data = await response.text();
@@ -573,7 +584,7 @@
             const btnEspera = document.getElementById('btn-espera');
 
             if (slots <= 0) {
-                counterEl.classList.add('zero'); // Cambia el color del cuadro a naranja si es 0
+                counterEl.classList.add('zero'); 
                 btnAcceder.style.display = 'none';
                 btnEspera.style.display = 'inline-block';
             } else {
