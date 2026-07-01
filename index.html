@@ -521,21 +521,15 @@
     <div class="retiros-header">
         <h3 class="retiros-subtitle">RETIROS PROCESADOS</h3>
         <div class="retiros-amount">$00.00</div>
-        <p class="retiros-info">Al alcanzar $100 se lanza un 🎁 SORTEO | Al alcanzar $200 se lanza un 🏆 TORNEO</p>
+        <p class="retiros-info">Al alcanzar $200 se lanza un 🏆 TORNEO</p>
     </div>
 
     <div class="timeline-wrapper">
         <div class="progress-track">
-            <div class="progress-bar-fill glow-animation" style="width: 65%;"></div>
+            <div class="progress-bar-fill glow-animation" style="width: 0%;"></div>
         </div>
 
         <div class="marker marker-center">
-            <div class="triangle"></div>
-            <span class="label">SORTEO ($100)</span>
-            <span class="icon">🎁</span>
-        </div>
-
-        <div class="marker marker-end">
             <div class="triangle"></div>
             <span class="label">TORNEO ($200)</span>
             <span class="icon">🏆</span>
@@ -930,24 +924,32 @@
     </script>
 
 <script>
-    // Solo cambia el número aquí cuando quieras actualizar
-    const nuevoTotal = 27.68; 
-    const metaTorneo = 200.00;
+    // ==========================================
+    // CONFIGURACIÓN DEL TORNEO (Edita esto)
+    // ==========================================
+    const nuevoTotal = 27.68; // Cambia este valor con los retiros actuales
+    const metaTorneo = 200.00; // Cambia este valor para la nueva meta del torneo
 
-    // Actualiza el texto
+    // 1. Actualiza el texto grande en pantalla
     document.querySelector('.retiros-amount').innerText = '$' + nuevoTotal.toFixed(2);
 
-    // Calcula y actualiza la barra
-    let porcentaje = (nuevoTotal / metaTorneo) * 100;
-    if (porcentaje > 100) porcentaje = 100;
+    // 2. Calcula el ancho de la barra (Lógica infinita)
+    // Como el ícono del torneo está en el medio (50% del ancho), 
+    // multiplicamos la proporción por 50 en lugar de 100.
+    let porcentaje = (nuevoTotal / metaTorneo) * 50;
+    
+    // Aplicamos el ancho. No hay límite superior, así que si pasas la meta,
+    // la barra simplemente seguirá llenando el espacio restante.
     document.querySelector('.progress-bar-fill').style.width = porcentaje + '%';
 
-    // Activa los nodos visualmente
-    if (nuevoTotal >= 100) document.querySelector('.marker-center').classList.add('active');
-    if (nuevoTotal >= 200) document.querySelector('.marker-end').classList.add('active');
+    // 3. Activa el nodo del torneo visualmente (brillo dorado) si se alcanza la meta
+    if (nuevoTotal >= metaTorneo) {
+        document.querySelector('.marker-center').classList.add('active');
+    } else {
+        // Asegura que se apague si editas los valores hacia abajo
+        document.querySelector('.marker-center').classList.remove('active');
+    }
 </script>
-
-
 
 </body>
 </html>
